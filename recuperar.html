@@ -1,0 +1,30 @@
+<!-- ARCHIVO: recuperar.html -->
+<!doctype html><html lang="es-CL"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recuperar mi carta — Cartita</title><meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css"><style>:root{--lacre:#8E2F2F}</style></head><body>
+<header><div class="wrap cab"><a class="logo" href="index.html">carti<span>ta</span></a><a class="volver" href="index.html">← Volver al inicio</a></div></header>
+<div class="wrap" style="padding:50px 20px">
+<h1 style="text-align:center;font-size:1.8rem">Recupera tu carta</h1>
+<p style="text-align:center;color:var(--gris);max-width:38ch;margin:12px auto 28px">Escribe tu código de recuperación. Sirve mientras tu carta esté online.</p>
+<div class="recuadro">
+  <label for="cod" style="font-size:.84rem;font-weight:600">Código</label>
+  <input type="text" id="cod" maxlength="14" placeholder="AMR-0000-0000">
+  <button class="btn btn-p" style="width:100%" id="buscar">Recuperar mi link</button>
+  <div class="aviso" id="aviso"></div>
+  <p style="font-size:.8rem;color:var(--gris);margin:18px 0 0">¿Perdiste también el código? <a href="mailto:soporte@cartita.cl" style="color:var(--lacre)">Escríbenos</a> con tu correo de compra.</p>
+</div></div>
+<footer><div class="wrap"><a href="index.html">Inicio</a><a href="terminos.html">Términos</a><a href="privacidad.html">Privacidad</a><a href="mailto:soporte@cartita.cl">Soporte</a></div></footer>
+<script>
+document.getElementById('buscar').addEventListener('click',()=>{
+  const v=document.getElementById('cod').value.trim().toUpperCase();
+  const a=document.getElementById('aviso');
+  a.className='aviso';
+  if(v.length<10){a.classList.add('mal','visible');a.textContent='Escribe el código completo, con sus guiones.';return;}
+  /* acá va la consulta real cuando exista backend */
+  a.classList.add('mal','visible');
+  a.textContent='No encontramos ese código. Revisa que esté bien escrito, sin espacios.';
+});
+</script>
+</body></html>
