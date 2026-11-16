@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cartita — cartas digitales con fotos, textos, música, voz y video</title>
+<meta name="description" content="Crea una carta digital para cumpleaños, aniversario o declaración. Fotos, textos, música, voz y video, enviada a su celular. Se sella hasta el día que importa. Desde $2.990 CLP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --crema:#F7F3EC; --tinta:#1F1B16; --lacre:#8E2F2F; --oliva:#4A5A44;
+  --gris:#6B635A; --linea:#DED6C8; --blanco:#FFFDF9;
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crema);color:var(--tinta);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
+a{color:inherit}
+.btn{display:inline-block;padding:15px 30px;border-radius:100px;font-weight:600;text-decoration:none;border:1.5px solid transparent;font-size:1rem;transition:.2s}
+.btn-p{background:var(--lacre);color:#fff}
+.btn-p:hover{background:#732525}
+.btn-s{border-color:var(--tinta);color:var(--tinta)}
+.btn-s:hover{background:var(--tinta);color:var(--crema)}
+header{padding:22px 0;border-bottom:1px solid var(--linea)}
+.logo{font-family:var(--serif);font-size:1.5rem;font-weight:600;letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--lacre)}
+.hero{padding:56px 0 40px;text-align:center}
+.kicker{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--oliva);font-weight:600;margin-bottom:18px}
+h1{font-size:clamp(2.3rem,7vw,4rem);letter-spacing:-.02em}
+.hero p.sub{font-size:1.08rem;color:var(--gris);max-width:38ch;margin:20px auto 30px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.precio{margin-top:22px;font-family:var(--serif);font-size:1.35rem}
+.usd{margin:4px 0 0;font-size:.76rem;color:var(--gris)}
+.escena{width:230px;height:170px;margin:44px auto 0;position:relative;perspective:900px}
+.sobre{position:absolute;inset:0;background:var(--blanco);border:1.5px solid var(--tinta);border-radius:4px;box-shadow:0 14px 34px rgba(31,27,22,.14)}
+.carta{position:absolute;left:14px;right:14px;top:12px;height:120px;background:var(--crema);border:1px solid var(--linea);border-radius:2px;animation:sale 4.2s ease-in-out infinite}
+.solapa{position:absolute;left:0;right:0;top:0;height:88px;background:var(--blanco);border:1.5px solid var(--tinta);border-bottom:0;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;animation:abre 4.2s ease-in-out infinite;z-index:3;backface-visibility:hidden}
+.sello{position:absolute;left:50%;top:74px;width:34px;height:34px;margin-left:-17px;border-radius:50%;background:var(--lacre);color:#fff;font-family:var(--serif);display:grid;place-items:center;font-size:.95rem;z-index:4;animation:sello 4.2s ease-in-out infinite}
+@keyframes abre{0%,18%{transform:rotateX(0)}45%,80%{transform:rotateX(-168deg)}100%{transform:rotateX(0)}}
+@keyframes sale{0%,35%{transform:translateY(0)}55%,80%{transform:translateY(-46px)}100%{transform:translateY(0)}}
+@keyframes sello{0%,18%{opacity:1;transform:scale(1)}26%{opacity:0;transform:scale(1.4)}88%{opacity:0}100%{opacity:1;transform:scale(1)}}
+section{padding:60px 0}
+.eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--oliva);font-weight:600;margin-bottom:12px}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:14px}
+.intro{color:var(--gris);max-width:52ch;margin:0 0 36px}
+.grid-c{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:760px){.grid-c{grid-template-columns:repeat(4,1fr);gap:16px}}
+.cat{position:relative;display:block;text-decoration:none;border-radius:10px;overflow:hidden;aspect-ratio:3/4;border:1px solid var(--linea);transition:.25s}
+.cat:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(31,27,22,.13)}
+.cat .fondo{position:absolute;inset:0}
+.cat .txt{position:absolute;inset:auto 0 0 0;padding:14px;background:linear-gradient(transparent,rgba(20,17,13,.82));color:#fff}
+.cat b{font-family:var(--serif);font-size:1.05rem;display:block;line-height:1.2}
+.cat small{font-size:.75rem;opacity:.85}
+.pasos{display:grid;gap:26px;counter-reset:p}
+@media(min-width:760px){.pasos{grid-template-columns:repeat(4,1fr)}}
+.paso::before{counter-increment:p;content:counter(p);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--tinta);color:var(--crema);font-family:var(--serif);margin-bottom:12px}
+.paso h3{font-size:1.05rem;margin-bottom:6px}
+.paso p{margin:0;color:var(--gris);font-size:.94rem}
+.modos{display:grid;gap:16px}
+@media(min-width:760px){.modos{grid-template-columns:repeat(3,1fr)}}
+.modo{border:1px solid var(--linea);border-radius:10px;padding:22px;background:var(--blanco)}
+.modo h3{font-size:1.1rem;margin-bottom:6px}
+.modo p{margin:0;color:var(--gris);font-size:.94rem}
+.tira{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+.tira div{flex:0 0 150px;aspect-ratio:3/4;border-radius:8px;scroll-snap-align:start;border:1px solid var(--linea)}
+.conf{display:grid;gap:14px}
+@media(min-width:760px){.conf{grid-template-columns:repeat(2,1fr)}}
+.conf div{background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:16px;font-size:.94rem}
+.conf b{display:block;font-family:var(--serif);margin-bottom:2px}
+details{border-bottom:1px solid var(--linea);padding:16px 0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--lacre);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--gris);margin:12px 0 0}
+footer{background:var(--tinta);color:#CFC6BA;padding:46px 0 34px;font-size:.9rem}
+footer .cols{display:grid;gap:26px;margin-bottom:30px}
+@media(min-width:760px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer a{text-decoration:none;display:block;margin-bottom:8px}
+footer a:hover{color:#fff}
+footer .firma{font-family:var(--serif);color:#fff;font-size:1.2rem;margin-bottom:10px}
+.pie-legal{font-size:.76rem;color:#A69C90;margin:14px 0 0;line-height:1.5}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><a class="logo" href="index.html">carti<span>ta</span></a></div>
+</header>
+
+<main>
+<div class="hero wrap">
+  <p class="kicker">Cartas digitales para Chile y todo el mundo</p>
+  <h1>Cartas que se abren solas</h1>
+  <p class="sub">Fotos, textos, música, voz y tu video en una sola carta enviada por tu celular. Elige cómo se abre: al instante, con clave o programada para el día que quieras. Sin instalar nada.</p>
+  <div class="cta">
+    <a class="btn btn-p" href="cumpleanos.html">Escribir mi carta</a>
+    <a class="btn btn-s" href="ejemplo.html">Ver un ejemplo</a>
+  </div>
+  <p class="precio">desde $2.990 pesos</p>
+  <p class="usd">≈ USD $3 · IVA incluido</p>
+
+  <div class="escena" aria-hidden="true">
+    <div class="sobre"></div>
+    <div class="carta"></div>
+    <div class="solapa"></div>
+    <div class="sello">J</div>
+  </div>
+</div>
+
+<section class="wrap">
+  <p class="eyebrow">Elige la ocasión</p>
+  <h2>¿Qué quieres decir hoy?</h2>
+  <p class="intro">Cada ocasión tiene sus diseños. Los tres planes están adentro de cada una.</p>
+  <div class="grid-c">
+    <a class="cat" href="cumpleanos.html"><span class="fondo" style="background:linear-gradient(150deg,#C98B4B,#8E2F2F)"></span><span class="txt"><b>Cumpleaños</b><small>desde $2.990 CLP</small></span></a>
+    <a class="cat" href="aniversario.html"><span class="fondo" style="background:linear-gradient(150deg,#B4552D,#4A2436)"></span><span class="txt"><b>Aniversario</b><small>desde $2.990 CLP</small></span></a>
+    <a class="cat" href="pololeo.html"><span class="fondo" style="background:linear-gradient(150deg,#D98E8E,#8E2F2F)"></span><span class="txt"><b>Pedir pololeo</b><small>desde $2.990 CLP</small></span></a>
+    <a class="cat" href="declaracion.html"><span class="fondo" style="background:linear-gradient(150deg,#8E2F2F,#2A1418)"></span><span class="txt"><b>Declaración de amor</b><small>desde $2.990 CLP</small></span></a>
+    <a class="cat" href="perdon.html"><span class="fondo" style="background:linear-gradient(150deg,#8A9A82,#4A5A44)"></span><span class="txt"><b>Perdón</b><small>desde $2.990 CLP</small></span></a>
+    <a class="cat" href="dia-de-la-madre.html"><span class="fondo" style="background:linear-gradient(150deg,#D9B98A,#A8794A)"></span><span class="txt"><b>Día de la madre</b><small>desde $2.990 CLP</small></span></a>
+    <a class="cat" href="dia-del-padre.html"><span class="fondo" style="background:linear-gradient(150deg,#6C7A8A,#2E3A46)"></span><span class="txt"><b>Día del padre</b><small>desde $2.990 CLP</small></span></a>
+    <a class="cat" href="agradecimiento.html"><span class="fondo" style="background:linear-gradient(150deg,#C7BFAE,#6B635A)"></span><span class="txt"><b>Agradecimiento</b><small>desde $2.990 CLP</small></span></a>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Cómo funciona</p>
+  <h2>Cuatro pasos, sin saber de diseño</h2>
+  <p class="intro">Armas la carta entera y la ves terminada antes de pagar.</p>
+  <div class="pasos">
+    <div class="paso"><h3>Elige</h3><p>La ocasión, el cierre y el plan.</p></div>
+    <div class="paso"><h3>Escribe</h3><p>Tu mensaje, tus fotos, tu música y tu voz.</p></div>
+    <div class="paso"><h3>Mira</h3><p>Cómo queda, antes de pagar.</p></div>
+    <div class="paso"><h3>Envía</h3><p>Link o QR por WhatsApp.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Tres formas de llegar</p>
+  <h2>Tú eliges cómo la recibe</h2>
+  <p class="intro">La misma carta, tres maneras de abrirse.</p>
+  <div class="modos">
+    <div class="modo"><h3>Abierta</h3><p>La abre apenas le llega. Para el día mismo.</p></div>
+    <div class="modo"><h3>Con clave</h3><p>Se abre al escribir la fecha correcta. Un juego entre ustedes.</p></div>
+    <div class="modo"><h3>Programada</h3><p>Sellada hasta el día y la hora que elijas. No hay forma de saltarla.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Diseños</p>
+  <h2>Un diseño para cada historia</h2>
+  <div class="tira">
+    <div style="background:linear-gradient(160deg,#F0E4D2,#C9A57B)"></div>
+    <div style="background:linear-gradient(160deg,#E9D6D6,#8E2F2F)"></div>
+    <div style="background:linear-gradient(160deg,#DCE4DA,#4A5A44)"></div>
+    <div style="background:linear-gradient(160deg,#E4DFD6,#6B635A)"></div>
+    <div style="background:linear-gradient(160deg,#F3E1CE,#B4552D)"></div>
+    <div style="background:linear-gradient(160deg,#DDD8E0,#4A2436)"></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Tranquilidad</p>
+  <h2>Lo que sí te garantizamos</h2>
+  <div class="conf">
+    <div><b>Pago seguro</b>Webpay y transferencia, por pasarela chilena.</div>
+    <div><b>Sin cuenta, sin app</b>Se abre en el navegador de cualquier teléfono.</div>
+    <div><b>Tiempo claro</b>Tu carta queda online hasta el día y 30 días más.</div>
+    <div><b>Código de recuperación</b>Si pierdes el link, lo recuperas.</div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Preguntas</p>
+  <h2>Lo que más nos preguntan</h2>
+  <details><summary>¿Qué es una cartita?</summary><p>Una página web personal que se abre como una carta: con fotos, textos, música, voz y video. Se manda por link o QR.</p></details>
+  <details><summary>¿Cuánto cuesta?</summary><p>Desde $2.990 CLP. El plan Completo cuesta $4.990 y el Premium $9.990, que incluye video y diseños exclusivos. Precios en pesos, IVA incluido.</p></details>
+  <details><summary>¿Puedo elegir que se abra en una fecha?</summary><p>Sí, con el plan Premium. La carta queda sellada hasta ese día y hora.</p></details>
+  <details><summary>¿Y si no adivinan la clave?</summary><p>La carta trae una pista que escribe quien la manda. Después de tres intentos aparece el botón para pedirla.</p></details>
+  <details><summary>¿Cuánto tiempo queda online?</summary><p>Hasta la fecha del evento y 30 días después, con un mínimo de 60 días. Se puede extender a un año por $1.990.</p></details>
+  <details><summary>¿Necesita instalar algo?</summary><p>No. Se abre en el navegador, sin cuenta y sin descargas.</p></details>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="firma">cartita</div>
+        <p>Cartas digitales hechas en Chile.</p>
+      </div>
+      <div>
+        <a href="cumpleanos.html">Cumpleaños</a>
+        <a href="aniversario.html">Aniversario</a>
+        <a href="declaracion.html">Declaración</a>
+        <a href="perdon.html">Perdón</a>
+      </div>
+      <div>
+        <a href="terminos.html">Términos</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="recuperar.html">Recuperar carta</a>
+        <a href="mailto:soporte@cartita.cl">Soporte</a>
+      </div>
+    </div>
+    <p class="pie-legal">Precios en pesos chilenos (CLP), IVA incluido. La conversión a dólar es solo referencial.</p>
+    <p style="margin:6px 0 0;font-size:.82rem;opacity:.7">© 2026 Cartita · Pago procesado por Flow</p>
+  </div>
+</footer>
+
+</body>
+</html>
