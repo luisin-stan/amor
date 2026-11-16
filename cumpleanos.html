@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Así se ve una cartita — ejemplo</title>
-<meta name="description" content="Ejemplos de cartas digitales: cumpleaños, pololeo, matrimonio, aniversario, perdón, día de la madre y del padre.">
-<meta name="robots" content="noindex">
+<title>Carta de cumpleaños digital — Cartita</title>
+<meta name="description" content="Sorpréndelo con una carta de cumpleaños que se abre sola. Fotos, textos, música, voz y tu video, enviada a su celular. Desde $2.990 CLP.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,371 +15,261 @@
   --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--crema);color:var(--tinta);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased}
-.barra-demo{position:sticky;top:0;z-index:60;background:var(--tinta);color:#EFE7DB;padding:9px 14px;display:flex;align-items:center;gap:10px;font-size:.78rem;flex-wrap:wrap}
-.barra-demo .volver{text-decoration:none;white-space:nowrap;opacity:.85}
-.barra-demo .volver:hover{opacity:1}
-.barra-demo .medio{flex:1;min-width:120px}
-.barra-demo a.crear{background:var(--lacre);color:#fff;text-decoration:none;padding:6px 14px;border-radius:100px;font-weight:600;white-space:nowrap}
-.modos{display:flex;gap:6px;width:100%;overflow-x:auto;padding-bottom:2px}
-.modos button{background:transparent;border:1px solid #5C544A;color:#EFE7DB;font-size:.74rem;padding:5px 12px;border-radius:100px;cursor:pointer;white-space:nowrap;font-family:var(--sans)}
-.modos button[aria-pressed="true"]{background:#EFE7DB;color:var(--tinta);border-color:#EFE7DB;font-weight:600}
-/* cierre */
-.cierre{min-height:calc(100dvh - 84px);display:grid;place-items:center;padding:28px 20px;position:relative;overflow:hidden}
-.cierre.oculto{display:none}
-.sobre-caja{width:min(300px,80vw);position:relative;perspective:1000px;cursor:pointer}
-.pieza{position:relative;aspect-ratio:3/2;background:var(--blanco);border:1.5px solid var(--tinta);border-radius:6px;box-shadow:0 18px 40px rgba(31,27,22,.16)}
-.solapa{position:absolute;inset:0;background:var(--blanco);border:1.5px solid var(--tinta);border-radius:6px;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;z-index:3;transition:transform .9s cubic-bezier(.6,0,.3,1)}
-.sello{position:absolute;left:50%;top:56%;width:44px;height:44px;margin-left:-22px;border-radius:50%;background:var(--lacre);color:#fff;font-family:var(--serif);display:grid;place-items:center;font-size:1.1rem;z-index:4;transition:.4s}
-.sobre-caja.abierto .solapa{transform:rotateX(-172deg)}
-.sobre-caja.abierto .sello{opacity:0;transform:scale(1.6)}
-.candado{position:absolute;left:50%;top:56%;margin-left:-16px;width:32px;height:32px;border-radius:8px;background:var(--tinta);color:#fff;display:none;place-items:center;font-size:.9rem;z-index:5}
-.modo-clave .candado{display:grid}
-.texto-sobre{text-align:center;margin-bottom:22px}
-.texto-sobre .k{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oliva);font-weight:600}
-.texto-sobre h1{font-family:var(--serif);font-size:1.8rem;margin:8px 0 0;line-height:1.2}
-.texto-sobre p{margin:5px 0 0;color:var(--gris);font-size:.92rem}
-.btn-abrir{display:none;margin:24px auto 0;padding:14px 40px;border-radius:100px;background:var(--lacre);color:#fff;border:0;font-size:1rem;font-weight:600;cursor:pointer;font-family:var(--sans)}
-.modo-abierta .btn-abrir{display:block}
-/* clave */
-.panel-clave{display:none;max-width:320px;margin:24px auto 0;text-align:center}
-.modo-clave .panel-clave{display:block}
-.pista{border:1px solid var(--linea);background:var(--blanco);border-radius:8px;padding:10px 14px;font-size:.86rem;margin-bottom:14px}
-.pista b{display:block;font-family:var(--serif);font-size:.95rem;margin-bottom:2px}
-.casillas{display:flex;gap:6px;justify-content:center;margin-bottom:14px}
-.casilla{width:30px;height:38px;border:1.5px solid var(--linea);border-radius:5px;background:var(--blanco);display:grid;place-items:center;font-size:1rem;font-weight:600;position:relative}
-.casilla.ok{border-color:var(--oliva);background:#EDF2EA}
-.casilla.mal{border-color:var(--lacre);background:#F7EAEA}
-.casilla .sg{position:absolute;top:-9px;font-size:.7rem;font-weight:700}
-.casilla.ok .sg{color:var(--oliva)}
-.casilla.mal .sg{color:var(--lacre)}
-.teclado{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.teclado button{padding:12px 0;border:1px solid var(--linea);background:var(--blanco);border-radius:7px;font-size:1.05rem;font-family:var(--sans);cursor:pointer}
-.teclado button:active{background:var(--crema)}
-.pedir{display:none;margin-top:14px;background:none;border:0;text-decoration:underline;color:var(--lacre);font-size:.85rem;cursor:pointer;font-family:var(--sans)}
-.pedir.visible{display:inline-block}
-.la-pista{display:none;margin-top:10px;font-size:.85rem;background:#F2EDE3;border-radius:7px;padding:10px}
-.la-pista.visible{display:block}
-/* programada */
-.panel-prog{display:none;text-align:center;margin-top:24px}
-.modo-programada .panel-prog{display:block}
-.reloj{display:flex;gap:10px;justify-content:center;font-family:var(--serif);font-size:1.7rem}
-.reloj span{background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:8px 12px;min-width:58px}
-.reloj small{display:block;font-family:var(--sans);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);font-weight:400}
-.fecha-prog{font-size:.86rem;color:var(--gris);margin:12px 0 0}
-.saltar{display:inline-block;margin-top:14px;font-size:.8rem;color:var(--lacre)}
-/* carta */
-.carta{max-width:620px;margin:0 auto;padding:36px 20px 60px;display:none}
-.carta.visible{display:block;animation:entra .7s ease both}
-@keyframes entra{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.carta h2{font-family:var(--serif);font-size:clamp(1.7rem,5vw,2.4rem);line-height:1.2;margin:0 0 6px}
-.carta .para{color:var(--gris);margin:0 0 24px;font-size:.92rem}
-.mensaje{font-family:var(--serif);font-size:1.1rem;line-height:1.75;margin:0 0 30px}
-.mensaje p{margin:0 0 15px}
-.fotos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:30px}
-.fotos .f{aspect-ratio:1;border-radius:4px;overflow:hidden;position:relative}
-.fotos .f .ph{width:100%;height:100%;display:block}
-.fotos .f.ancho{grid-column:span 2;aspect-ratio:16/10}
-.tr-pola{background:#fff;padding:8px 8px 26px;border-radius:2px;box-shadow:0 6px 16px rgba(31,27,22,.14)}
-.tr-sepia .ph{filter:sepia(.55) contrast(1.05)}
-.tr-bn .ph{filter:grayscale(1) contrast(1.1)}
-.tr-dorado{box-shadow:inset 0 0 0 5px #C9A227}
-.bloque{border:1px solid var(--linea);border-radius:10px;background:var(--blanco);padding:15px;margin-bottom:18px;display:flex;align-items:center;gap:13px}
-.bloque .ico{width:42px;height:42px;border-radius:50%;background:var(--lacre);color:#fff;display:grid;place-items:center;flex:0 0 auto;border:0;cursor:pointer;font-size:.95rem}
-.bloque .info{flex:1;min-width:0}
-.bloque .info b{display:block;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bloque .info small{color:var(--gris);font-size:.76rem}
-.barra-prog{height:3px;background:var(--linea);border-radius:2px;margin-top:7px;overflow:hidden}
-.barra-prog i{display:block;height:100%;width:0;background:var(--lacre);transition:width .3s linear}
-.video{aspect-ratio:9/16;max-width:280px;margin:0 auto 26px;border-radius:14px;background:linear-gradient(165deg,#F0E4D2,#B4552D);display:grid;place-items:center}
-.video .play{width:58px;height:58px;border-radius:50%;background:rgba(255,253,249,.92);border:0;cursor:pointer;display:grid;place-items:center}
-.video .play::after{content:"";border-left:15px solid var(--lacre);border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
-/* propuesta si/no */
-.propuesta{text-align:center;border:1px solid var(--linea);border-radius:12px;padding:26px 18px;margin:0 0 26px;background:var(--blanco);position:relative}
-.propuesta p{margin:0 0 18px;font-family:var(--serif);font-size:1.15rem}
-.area-si{display:flex;gap:14px;justify-content:center;align-items:center;min-height:64px;position:relative;flex-wrap:wrap}
-.btn-si{background:var(--lacre);color:#fff;border:0;border-radius:100px;padding:13px 26px;font-size:1rem;font-weight:600;cursor:pointer;transition:transform .25s,font-size .25s,background .2s;font-family:var(--sans)}
-.btn-no{background:var(--blanco);color:var(--tinta);border:1.5px solid var(--tinta);border-radius:100px;padding:12px 24px;font-size:.95rem;cursor:pointer;transition:.18s;font-family:var(--sans)}
-.aceptado{display:none}
-.aceptado.visible{display:block;animation:entra .5s ease both}
-.aceptado .gran{font-family:var(--serif);font-size:1.5rem;color:var(--lacre);margin:0 0 8px}
-.aceptado small{color:var(--gris)}
-.confeti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:80}
-.confeti i{position:absolute;width:9px;height:14px;top:-20px;animation:cae 2.6s linear forwards}
-@keyframes cae{to{transform:translateY(105vh) rotate(520deg);opacity:.2}}
-.cierre-final{text-align:center;font-family:var(--serif);font-size:1.28rem;margin:32px 0 8px}
-.firma{text-align:center;color:var(--gris);margin:0 0 38px}
-.pie-carta{text-align:center;border-top:1px solid var(--linea);padding-top:24px}
-.pie-carta a{color:var(--lacre);font-weight:600;text-decoration:none}
-.pie-carta span{display:block;font-size:.74rem;color:var(--gris);margin-top:8px}
+body{margin:0;background:var(--crema);color:var(--tinta);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:78px}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
+a{color:inherit}
+header{padding:22px 0;border-bottom:1px solid var(--linea)}
+.logo{font-family:var(--serif);font-size:1.5rem;font-weight:600;letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--lacre)}
+  .cab{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.volver{font-size:.85rem;text-decoration:none;color:var(--gris);border:1px solid var(--linea);padding:7px 14px;border-radius:100px;transition:.2s}
+.volver:hover{color:var(--tinta);border-color:var(--tinta)}
+.miga{font-size:.85rem;color:var(--gris);padding:20px 0 0}
+.miga a{text-decoration:none}
+.miga a:hover{text-decoration:underline}
+.cabeza{padding:26px 0 30px}
+.cabeza h1{font-size:clamp(1.9rem,5vw,3rem);letter-spacing:-.02em}
+.cabeza p{color:var(--gris);max-width:52ch;margin:14px 0 22px;font-size:1.05rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;text-align:center;padding:14px 24px;border-radius:100px;font-weight:600;text-decoration:none;border:1.5px solid var(--tinta);transition:.2s}
+.btn:hover{background:var(--tinta);color:var(--crema)}
+.btn-p{background:var(--lacre);border-color:var(--lacre);color:#fff}
+.btn-p:hover{background:#732525;border-color:#732525}
+.sello-conf{display:flex;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--gris);margin-top:18px}
+.sello-conf span::before{content:"✓ ";color:var(--oliva);font-weight:700}
+section{padding:42px 0}
+.eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--oliva);font-weight:600;margin-bottom:12px}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:10px}
+.intro{color:var(--gris);max-width:52ch;margin:0 0 28px}
+.video-caja{max-width:290px;margin:0 auto;aspect-ratio:9/16;border-radius:16px;border:1px solid var(--linea);background:linear-gradient(165deg,#F0E4D2,#B4552D);display:grid;place-items:center;position:relative;overflow:hidden}
+.video-caja .play{width:64px;height:64px;border-radius:50%;background:rgba(255,253,249,.92);display:grid;place-items:center;border:0;cursor:pointer}
+.video-caja .play::after{content:"";border-left:18px solid var(--lacre);border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+.video-caja .rot{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:.78rem;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.planes{display:grid;gap:16px}
+@media(min-width:820px){.planes{grid-template-columns:repeat(3,1fr);align-items:start}}
+.plan{position:relative;background:var(--blanco);border:1.5px solid var(--linea);border-radius:12px;padding:26px 22px 22px}
+.plan.dest{border-color:var(--lacre);box-shadow:0 14px 34px rgba(142,47,47,.14)}
+.badge{position:absolute;top:-12px;left:22px;background:var(--lacre);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
+.plan h3{font-size:1.35rem;margin-bottom:4px}
+.plan .precio{font-family:var(--serif);font-size:2rem;margin:10px 0 0}
+.plan .precio small{font-family:var(--sans);font-size:.78rem;color:var(--gris);font-weight:400;letter-spacing:.05em}
+.usd{font-size:.76rem;color:var(--gris);margin:2px 0 0}
+.plan .resumen{font-size:.9rem;color:var(--gris);margin:14px 0 18px;min-height:2.6em}
+.plan ul{list-style:none;padding:0;margin:0 0 22px;font-size:.93rem}
+.plan li{padding:7px 0 7px 26px;position:relative;border-bottom:1px solid #F0EAE0}
+.plan li:last-child{border-bottom:0}
+.plan li.si::before{content:"✓";position:absolute;left:0;color:var(--oliva);font-weight:700}
+.plan li.no{color:#A69C90}
+.plan li.no::before{content:"—";position:absolute;left:0}
+.plan .btn{display:block}
+.nota{font-size:.85rem;color:var(--gris);margin-top:20px}
+.pie-legal{font-size:.76rem;color:var(--gris);margin-top:12px;line-height:1.5}
+.cierres{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:760px){.cierres{grid-template-columns:repeat(4,1fr)}}
+.cierre{border:1px solid var(--linea);border-radius:10px;background:var(--blanco);overflow:hidden;text-decoration:none;display:block;transition:.2s}
+.cierre:hover{border-color:var(--tinta);transform:translateY(-3px)}
+.demo{height:96px;position:relative;background:repeating-linear-gradient(45deg,#FBF6EC,#FBF6EC 8px,#F6EFE2 8px,#F6EFE2 16px);overflow:hidden;display:grid;place-items:center}
+.cierre .lbl{padding:10px 12px 12px;font-size:.84rem}
+.cierre .lbl b{display:block;font-family:var(--serif);font-size:.98rem;line-height:1.2}
+.cierre .lbl small{color:var(--gris);font-size:.74rem}
+.forma{background:var(--blanco);border:1.5px solid var(--tinta);position:relative}
+.f-sobre{width:64px;height:42px;border-radius:3px}
+.f-sobre::after{content:"";position:absolute;inset:0;background:var(--blanco);border:1.5px solid var(--tinta);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;animation:a-abre 6s ease-in-out infinite}
+.f-sobre::before{content:"";position:absolute;left:50%;top:14px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--lacre);z-index:2;animation:a-sello 6s ease-in-out infinite}
+.f-nota{width:44px;height:52px;border-radius:2px;animation:a-dobla 6s ease-in-out infinite}
+.f-nota::after{content:"";position:absolute;left:0;right:0;top:50%;border-top:1.5px dashed var(--linea)}
+.f-pola{width:48px;height:56px;border-radius:2px;padding:5px 5px 14px;animation:a-gira 6s ease-in-out infinite}
+.f-pola::after{content:"";position:absolute;inset:5px 5px 14px;background:linear-gradient(160deg,#E9D6D6,#8E2F2F)}
+.f-caja{width:54px;height:38px;border-radius:3px;align-self:end;margin-bottom:22px}
+.f-caja::before{content:"";position:absolute;left:-5px;right:-5px;top:-12px;height:14px;background:var(--blanco);border:1.5px solid var(--tinta);border-radius:3px;transform-origin:left;animation:a-tapa 6s ease-in-out infinite}
+.f-caja::after{content:"";position:absolute;left:50%;top:-12px;bottom:0;width:6px;margin-left:-3px;background:var(--lacre)}
+.f-frasco{width:34px;height:44px;border-radius:4px 4px 8px 8px;background:#EFEAE0}
+.f-frasco::before{content:"";position:absolute;left:50%;top:26px;width:16px;height:0;margin-left:-8px;background:var(--crema);border:1.5px solid var(--tinta);border-radius:1px;animation:a-sube 6s ease-in-out infinite}
+.f-frasco::after{content:"";position:absolute;left:8px;right:8px;top:-8px;height:9px;background:var(--lacre);border-radius:2px}
+.f-vinilo{width:58px;height:52px;border-radius:3px}
+.f-vinilo::before{content:"";position:absolute;right:4px;top:50%;width:34px;height:34px;margin-top:-17px;border-radius:50%;background:radial-gradient(circle,#C9A227 0 4px,#2A2621 5px 100%);animation:a-sale 6s ease-in-out infinite}
+.f-peli{width:62px;height:38px;border-radius:2px;display:flex;gap:3px;padding:4px;align-items:center;animation:a-tira 6s ease-in-out infinite}
+.f-peli i{flex:1;height:100%;background:linear-gradient(160deg,#DDD8E0,#4A2436);border-radius:1px}
+.f-avion{width:44px;height:44px;border:0;clip-path:polygon(0 45%,100% 0,62% 100%,52% 58%);animation:a-vuela 6s ease-in-out infinite}
+@keyframes a-abre{0%,15%{transform:rotateX(0)}45%,80%{transform:rotateX(-170deg)}100%{transform:rotateX(0)}}
+@keyframes a-sello{0%,15%{opacity:1;transform:scale(1)}24%{opacity:0;transform:scale(1.5)}90%{opacity:0}100%{opacity:1;transform:scale(1)}}
+@keyframes a-dobla{0%,20%{transform:scaleY(.45)}55%,85%{transform:scaleY(1)}100%{transform:scaleY(.45)}}
+@keyframes a-gira{0%,20%{transform:rotateY(0)}60%,85%{transform:rotateY(180deg)}100%{transform:rotateY(0)}}
+@keyframes a-tapa{0%,20%{transform:rotate(0)}55%,85%{transform:rotate(-28deg)}100%{transform:rotate(0)}}
+@keyframes a-sube{0%,20%{height:0;top:26px}55%,85%{height:26px;top:8px}100%{height:0;top:26px}}
+@keyframes a-sale{0%,20%{transform:translateX(0)}55%,85%{transform:translateX(-22px)}100%{transform:translateX(0)}}
+@keyframes a-tira{0%,20%{transform:translateX(0)}55%,85%{transform:translateX(-8px)}100%{transform:translateX(0)}}
+@keyframes a-vuela{0%,20%{transform:translate(0,0) rotate(0)}55%,85%{transform:translate(10px,-8px) rotate(14deg)}100%{transform:translate(0,0) rotate(0)}}
+.tira{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}
+.tira div{flex:0 0 140px;aspect-ratio:3/4;border-radius:8px;border:1px solid var(--linea)}
+details{border-bottom:1px solid var(--linea);padding:16px 0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--lacre);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--gris);margin:12px 0 0}
+footer{background:var(--tinta);color:#CFC6BA;padding:40px 0 30px;font-size:.88rem}
+footer a{text-decoration:none;display:block;margin-bottom:7px}
+footer a:hover{color:#fff}
+.barra{position:fixed;left:0;right:0;bottom:0;background:var(--blanco);border-top:1px solid var(--linea);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:20}
+.barra span{font-size:.85rem;color:var(--gris)}
+.barra b{font-family:var(--serif);color:var(--tinta);font-size:1.05rem}
+@media(min-width:820px){.barra{display:none}body{padding-bottom:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
 
-<div class="barra-demo">
-  <a class="volver" id="volver" href="cumpleanos.html">← Volver</a>
-  <span class="medio">Así se ve una cartita. Esta es de ejemplo.</span>
-  <a class="crear" id="crear" href="cumpleanos.html">Crear la mía</a>
-  <div class="modos" role="group" aria-label="Forma de apertura">
-    <button data-modo="abierta" aria-pressed="true">Abierta</button>
-    <button data-modo="clave" aria-pressed="false">Con clave</button>
-    <button data-modo="programada" aria-pressed="false">Programada</button>
+<header><div class="wrap cab"><a class="logo" href="index.html">carti<span>ta</span></a><a class="volver" href="index.html">← Volver al inicio</a></div></header>
+
+<div class="wrap">
+  <p class="miga"><a href="index.html">Inicio</a> / Cumpleaños</p>
+  <div class="cabeza">
+    <h1>Carta de cumpleaños</h1>
+    <p>Sorpréndelo con una carta que se abre sola el día de su cumpleaños. Fotos, textos, música, voz y tu video, enviada a su celular.</p>
+    <div class="cta">
+      <a class="btn btn-p" href="#planes">Elegir mi plan</a>
+      <a class="btn" href="ejemplo.html">Ver ejemplo completo</a>
+    </div>
+    <div class="sello-conf">
+      <span>Sin marca de agua</span>
+      <span>Online hasta el día + 30</span>
+      <span>Código de recuperación</span>
+    </div>
   </div>
 </div>
 
-<section class="cierre modo-abierta" id="pantallaCierre">
-  <div>
-    <div class="texto-sobre">
-      <p class="k">Recibiste una carta</p>
-      <h1 id="de">de Javier Soto</h1>
-      <p id="para">Para Camila</p>
-    </div>
-    <div class="sobre-caja" id="sobre" role="button" tabindex="0" aria-label="Abrir la carta">
-      <div class="pieza"><div class="solapa"></div><div class="sello">J</div><div class="candado">🔒</div></div>
-    </div>
-    <button class="btn-abrir" id="btnAbrir">Abrir</button>
-
-    <div class="panel-clave">
-      <div class="pista"><b id="pistaTit">Escribe la fecha de tu cumpleaños</b>Un juego entre ustedes.</div>
-      <div class="casillas" id="casillas" aria-live="polite"></div>
-      <div class="teclado" id="teclado"></div>
-      <button class="pedir" id="pedir">Pedirle una pista a Javier</button>
-      <div class="la-pista" id="laPista"></div>
-    </div>
-
-    <div class="panel-prog">
-      <div class="reloj" id="reloj">
-        <span><b id="d">00</b><small>días</small></span>
-        <span><b id="h">00</b><small>horas</small></span>
-        <span><b id="m">00</b><small>min</small></span>
-        <span><b id="s">00</b><small>seg</small></span>
-      </div>
-      <p class="fecha-prog" id="fechaProg"></p>
-      <a class="saltar" href="#" id="saltar">Ver sin esperar</a>
-    </div>
+<section class="wrap">
+  <p class="eyebrow">Ejemplo</p>
+  <h2>Así se ve una carta de cumpleaños</h2>
+  <p class="intro">Veinte segundos, sin sonido, para que veas la apertura, las fotos y cómo se cierra.</p>
+  <div class="video-caja">
+    <button class="play" aria-label="Reproducir video de ejemplo"></button>
+    <span class="rot">Video de ejemplo · 20 s</span>
   </div>
 </section>
 
-<main class="carta" id="carta">
-  <p class="para" id="fecha">Cumpleaños · 14 de marzo</p>
-  <h2 id="titulo">Feliz cumpleaños, Camila</h2>
-  <div class="mensaje" id="mensaje"></div>
+<section class="wrap" id="planes">
+  <p class="eyebrow">Elige tu plan</p>
+  <h2>Tres formas de decirlo</h2>
+  <p class="intro">Todos los planes se entregan sin marca de agua. Puedes cambiar de plan en cualquier momento antes de pagar.</p>
 
-  <div class="propuesta" id="propuesta" hidden>
-    <p id="pregunta">¿Quieres pololear conmigo?</p>
-    <div class="area-si" id="areaSi">
-      <button class="btn-si" id="btnSi">Sí</button>
-      <button class="btn-no" id="btnNo">No</button>
+  <div class="planes">
+    <div class="plan">
+      <h3>Esencial</h3>
+      <p class="precio">$2.990 <small>CLP</small></p>
+      <p class="usd">≈ USD $3</p>
+      <p class="resumen">Una carta simple, directa, con lo justo.</p>
+      <ul>
+        <li class="si">3 fotos</li>
+        <li class="si">Texto libre</li>
+        <li class="si">Cierre en sobre o nota</li>
+        <li class="si">3 diseños</li>
+        <li class="si">Se abre al instante</li>
+        <li class="no">Sin música</li>
+        <li class="no">Sin voz</li>
+        <li class="no">Sin video</li>
+        <li class="no">Sin clave ni programación</li>
+      </ul>
+      <a class="btn" href="crear.html?plan=esencial">Elegir Esencial</a>
     </div>
-    <div class="aceptado" id="aceptado">
-      <p class="gran" id="textoSi">No sabía que me ibas a decir que sí.</p>
-      <small>Ahora sí es oficial.</small>
+
+    <div class="plan dest">
+      <span class="badge">El más elegido</span>
+      <h3>Completo</h3>
+      <p class="precio">$4.990 <small>CLP</small></p>
+      <p class="usd">≈ USD $5</p>
+      <p class="resumen">La carta que de verdad emociona.</p>
+      <ul>
+        <li class="si">15 fotos</li>
+        <li class="si">1 canción</li>
+        <li class="si">1 nota de voz</li>
+        <li class="si">Todos los cierres</li>
+        <li class="si">Todos los diseños</li>
+        <li class="si">Clave opcional</li>
+        <li class="no">Sin video</li>
+        <li class="no">Sin programar</li>
+      </ul>
+      <a class="btn btn-p" href="crear.html?plan=completo">Elegir Completo</a>
+    </div>
+
+    <div class="plan">
+      <h3>Premium</h3>
+      <p class="precio">$9.990 <small>CLP</small></p>
+      <p class="usd">≈ USD $10</p>
+      <p class="resumen">Para el cumpleaños que no se puede olvidar.</p>
+      <ul>
+        <li class="si">30 fotos</li>
+        <li class="si">2 canciones</li>
+        <li class="si">2 notas de voz</li>
+        <li class="si">Video tuyo, hasta 90 s</li>
+        <li class="si">Diseños exclusivos</li>
+        <li class="si">Clave opcional</li>
+        <li class="si">Programada para el día</li>
+      </ul>
+      <a class="btn" href="crear.html?plan=premium">Elegir Premium</a>
     </div>
   </div>
+  <p class="nota">El video lo subes tú, desde tu celular. Hasta 90 segundos.</p>
+  <p class="pie-legal">Precios en pesos chilenos, IVA incluido. La conversión a dólar es solo referencial y puede variar según el banco emisor.</p>
+</section>
 
-  <div class="fotos">
-    <div class="f tr-pola"><div class="ph" style="background:linear-gradient(150deg,#E9D6D6,#8E2F2F)"></div></div>
-    <div class="f tr-sepia"><div class="ph" style="background:linear-gradient(150deg,#F0E4D2,#B4552D)"></div></div>
-    <div class="f ancho tr-dorado"><div class="ph" style="background:linear-gradient(150deg,#DCE4DA,#4A5A44)"></div></div>
-    <div class="f tr-bn"><div class="ph" style="background:linear-gradient(150deg,#DDD8E0,#4A2436)"></div></div>
-    <div class="f"><div class="ph" style="background:linear-gradient(150deg,#F3E1CE,#C9A57B)"></div></div>
+<section class="wrap">
+  <p class="eyebrow">Formas de abrir</p>
+  <h2>Cómo va a llegar</h2>
+  <p class="intro">El cierre es el envoltorio: la animación con la que se destapa. Adentro va la carta. Toca una para verla.</p>
+  <div class="cierres">
+    <a class="cierre" href="ejemplo.html?cierre=sobre"><span class="demo"><span class="forma f-sobre"></span></span><span class="lbl"><b>Sobre con lacre</b><small>Los 3 planes</small></span></a>
+    <a class="cierre" href="ejemplo.html?cierre=nota"><span class="demo"><span class="forma f-nota"></span></span><span class="lbl"><b>Nota doblada</b><small>Los 3 planes</small></span></a>
+    <a class="cierre" href="ejemplo.html?cierre=polaroid"><span class="demo"><span class="forma f-pola"></span></span><span class="lbl"><b>Polaroid</b><small>Completo y Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cierre=caja"><span class="demo"><span class="forma f-caja"></span></span><span class="lbl"><b>Caja de regalo</b><small>Completo y Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cierre=frasco"><span class="demo"><span class="forma f-frasco"></span></span><span class="lbl"><b>Frasco con mensaje</b><small>Solo Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cierre=vinilo"><span class="demo"><span class="forma f-vinilo"></span></span><span class="lbl"><b>Funda de vinilo</b><small>Solo Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cierre=pelicula"><span class="demo"><span class="forma f-peli"><i></i><i></i><i></i></span></span><span class="lbl"><b>Rollo de película</b><small>Solo Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cierre=avion"><span class="demo"><span class="forma f-avion"></span></span><span class="lbl"><b>Avión de papel</b><small>Solo Premium</small></span></a>
   </div>
+</section>
 
-  <div class="bloque">
-    <button class="ico" aria-label="Reproducir canción">▶</button>
-    <div class="info"><b>Nuestra canción</b><small>3:12 · música</small><div class="barra-prog"><i></i></div></div>
+<section class="wrap">
+  <p class="eyebrow">Diseños</p>
+  <h2>Algunos que puedes usar</h2>
+  <div class="tira">
+    <div style="background:linear-gradient(160deg,#F0E4D2,#C9A57B)"></div>
+    <div style="background:linear-gradient(160deg,#E9D6D6,#8E2F2F)"></div>
+    <div style="background:linear-gradient(160deg,#DCE4DA,#4A5A44)"></div>
+    <div style="background:linear-gradient(160deg,#E4DFD6,#6B635A)"></div>
+    <div style="background:linear-gradient(160deg,#F3E1CE,#B4552D)"></div>
   </div>
+</section>
 
-  <div class="bloque">
-    <button class="ico" aria-label="Reproducir nota de voz">▶</button>
-    <div class="info"><b>Nota de voz de Javier</b><small>0:38 · voz</small><div class="barra-prog"><i></i></div></div>
+<section class="wrap">
+  <p class="eyebrow">Preguntas</p>
+  <h2>Sobre las cartas de cumpleaños</h2>
+  <details><summary>¿Puedo mandarla antes del cumpleaños?</summary><p>Sí. Con el plan Premium la programas para que se abra sola el día exacto, a la hora que elijas.</p></details>
+  <details><summary>¿Cuánto tiempo queda online?</summary><p>Hasta la fecha del cumpleaños y 30 días después, con un mínimo de 60 días. Se puede extender a un año por $1.990.</p></details>
+  <details><summary>¿Puedo editar después de pagar?</summary><p>Sí, todas las veces que quieras antes de que la abran. Después también, con aviso.</p></details>
+  <details><summary>¿Necesita instalar algo?</summary><p>No. Se abre en el navegador del celular, sin cuenta y sin descargas.</p></details>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html">Inicio</a>
+    <a href="terminos.html">Términos</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="mailto:soporte@cartita.cl">Soporte</a>
+    <p class="pie-legal" style="color:#A69C90">Precios en pesos chilenos (CLP), IVA incluido.</p>
+    <p style="margin:6px 0 0;font-size:.8rem;opacity:.7">© 2026 Cartita</p>
   </div>
+</footer>
 
-  <div class="video"><button class="play" aria-label="Reproducir video"></button></div>
+<div class="barra">
+  <span>desde <b>$2.990</b> CLP</span>
+  <a class="btn btn-p" href="#planes">Elegir plan</a>
+</div>
 
-  <p class="cierre-final" id="cierre-final">Te quiero.</p>
-  <p class="firma" id="firma">Javier</p>
-
-  <div class="pie-carta">
-    <a href="cumpleanos.html" id="crearPie">Haz tu propia cartita →</a>
-    <span>Hecho en Cartita</span>
-  </div>
-</main>
-
-<div class="confeti" id="confeti" aria-hidden="true"></div>
-
-<script>
-const CATS={
-  cumpleanos:{de:'Javier Soto',para:'Camila',titulo:'Feliz cumpleaños, Camila',fecha:'Cumpleaños · 14 de marzo',lacre:'#8E2F2F',cierre:'Te quiero.',firma:'Javier',
-    msj:['Camila:','Hay personas que llegan y cambian el tono de los días. Tú hiciste eso con los míos, y no de la forma ruidosa, sino de la buena.','Junté fotos que me gustan de nosotros. Puse la canción que cantamos mal en el auto y te grabé algo con mi voz, que es lo que más me cuesta.'],
-    clave:'1403',pista:'Escribe la fecha de mi cumpleaños',pista2:'La misma que la del título. Ando por el 14 de marzo.'},
-  aniversario:{de:'Andrés Vera',para:'Paula',titulo:'Cinco años, Paula',fecha:'Aniversario · 2 de julio',lacre:'#B4552D',cierre:'Por cinco más.',firma:'Andrés',
-    msj:['Paula:','Cinco años y todavía me acuerdo del día que nos reímos tanto que nos echaron de la plaza.','No tengo un discurso. Tengo estas fotos y las ganas de seguir sumando años contigo.'],
-    clave:'0207',pista:'Escribe la fecha de nuestro matrimonio',pista2:'Es el día que estamos celebrando. Dos de julio.'},
-  pololeo:{de:'Matías Rojas',para:'Fernanda',titulo:'Fernanda, ¿quieres pololear conmigo?',fecha:'Para preguntarte algo',lacre:'#C0504D',cierre:'Dime que sí.',firma:'Matías',propuesta:true,
-    pregunta:'¿Quieres pololear conmigo?',textoSi:'No sabía que me ibas a decir que sí.',
-    msj:['Fernanda:','Llevo semanas pensando cómo preguntarte esto y al final lo hice aquí, porque hablando me gana el nervio.','Contigo las cosas son fáciles. Quiero que sea oficial, que lo sepan todos y que sea contigo.'],
-    clave:'1106',pista:'Escribe la fecha en que nos conocimos',pista2:'Fue un once de junio, en lo de la Sofi.'},
-  matrimonio:{de:'Cristóbal Lagos',para:'Isidora',titulo:'Isidora, ¿te quieres casar conmigo?',fecha:'Para preguntarte algo',lacre:'#6E1F28',cierre:'Dime que sí.',firma:'Cristóbal',propuesta:true,
-    pregunta:'¿Te quieres casar conmigo?',textoSi:'Ocho años esperando esto y tú dijiste sí.',
-    msj:['Isidora:','Te lo iba a preguntar en la playa, con toda la parafernalia. Pero acá quedó mejor, porque acá es donde vivo contigo.','No te ofrezco una fiesta. Te ofrezco todos los días, los buenos y los fomes.'],
-    clave:'0508',pista:'Escribe la fecha de nuestro primer viaje',pista2:'Cinco de agosto, ese viaje al sur.'},
-  declaracion:{de:'Ignacio Paz',para:'Josefa',titulo:'Josefa, esto es lo que no te he dicho',fecha:'Para ti',lacre:'#8E2F2F',cierre:'Espero no haber llegado tarde.',firma:'Ignacio',
-    msj:['Josefa:','Te escribo esto porque hablándolo me gana el nervio.','No sé si sientes lo mismo. Sí sé que desde que llegaste, todo lo demás quedó en segundo plano.'],
-    clave:'2604',pista:'Escribe la fecha de nuestra primera cita',pista2:'Fue un veintiséis de abril, el café que se nos frío.'},
-  perdon:{de:'Rodrigo Salas',para:'Antonia',titulo:'Antonia, perdóname',fecha:'Para ti',lacre:'#4A5A44',cierre:'Perdóname de verdad.',firma:'Rodrigo',
-    msj:['Antonia:','Le di vueltas mil veces a lo que pasó y a la forma en que te lo dije. Tenías razón.','No vengo a justificarme. Vengo a decirte que lo vi, que me dolió haberte dolido, y que quiero arreglarlo.'],
-    clave:'1809',pista:'Escribe la fecha en que nos conocimos',pista2:'Dieciocho de septiembre, en la fonda de tu prima.'},
-  'dia-de-la-madre':{de:'Camila',para:'Mamá',titulo:'Mamá',fecha:'Día de la madre',lacre:'#A8794A',cierre:'Gracias por todo.',firma:'Tu hija',
-    msj:['Mamá:','Crecí viéndote resolver cosas que nadie te enseñó a resolver.','Ahora entiendo el costo de eso. Gracias por cada vez que te comiste el cansancio para que yo no lo viera.'],
-    clave:'0305',pista:'Escribe tu fecha de nacimiento',pista2:'Tres de mayo. La que anoto en todos los papeles.'},
-  'dia-del-padre':{de:'Tomás',para:'Papá',titulo:'Papá',fecha:'Día del padre',lacre:'#2E3A46',cierre:'Te quiero, viejo.',firma:'Tomás',
-    msj:['Papá:','No somos de hablar mucho, así que te lo dejo escrito.','Aprendí a manejar, a apretar tornillos y a no rendirme, mirándote. Gracias por eso.'],
-    clave:'2211',pista:'Escribe tu fecha de nacimiento',pista2:'Veintidós de noviembre. La misma que la del asado.'},
-  agradecimiento:{de:'Valentina',para:'Tía Rosa',titulo:'Gracias, tía Rosa',fecha:'Para ti',lacre:'#6B635A',cierre:'Gracias, en serio.',firma:'Valentina',
-    msj:['Tía Rosa:','Cuando todos miraban para otro lado, usted no.','Nunca le he dicho esto en persona y ya era hora: gracias por haberme recibido cuando no tenía dónde estar.'],
-    clave:'2019',pista:'Escribe el año en que me recibiste en tu casa',pista2:'Fue el año de la mudanza. Dos mil diecinueve.'}
-};
-const p=new URLSearchParams(location.search);
-const k=CATS[p.get('cat')]?p.get('cat'):'cumpleanos';
-const d=CATS[k];
-const $=id=>document.getElementById(id);
-
-$('de').textContent='de '+d.de;
-$('para').textContent='Para '+d.para;
-$('titulo').textContent=d.titulo;
-$('fecha').textContent=d.fecha;
-$('cierre-final').textContent=d.cierre;
-$('firma').textContent=d.firma;
-$('mensaje').innerHTML=d.msj.map(t=>'<p>'+t+'</p>').join('');
-$('volver').href=k+'.html';$('crear').href=k+'.html';$('crearPie').href=k+'.html';
-$('pistaTit').textContent=d.pista;
-$('pedir').textContent='Pedirle una pista a '+d.de.split(' ')[0];
-$('laPista').textContent=d.pista2;
-document.querySelector('.sello').textContent=d.de.charAt(0);
-document.documentElement.style.setProperty('--lacre',d.lacre);
-document.title='Ejemplo de cartita: '+d.fecha;
-
-if(d.propuesta){
-  $('propuesta').hidden=false;
-  $('pregunta').textContent=d.pregunta;
-  $('textoSi').textContent=d.textoSi;
-}
-
-/* modos */
-const pantalla=$('pantallaCierre');
-document.querySelectorAll('.modos button').forEach(b=>{
-  b.addEventListener('click',()=>{
-    document.querySelectorAll('.modos button').forEach(x=>x.setAttribute('aria-pressed','false'));
-    b.setAttribute('aria-pressed','true');
-    pantalla.className='cierre modo-'+b.dataset.modo;
-    $('carta').classList.remove('visible');
-    $('sobre').classList.remove('abierto');
-    reiniciarClave();
-    window.scrollTo(0,0);
-  });
-});
-
-/* apertura */
-function abrir(){
-  $('sobre').classList.add('abierto');
-  setTimeout(()=>{pantalla.classList.add('oculto');$('carta').classList.add('visible');window.scrollTo(0,0);},700);
-}
-$('btnAbrir').addEventListener('click',abrir);
-$('sobre').addEventListener('click',()=>{if(!pantalla.classList.contains('modo-clave'))abrir();});
-$('sobre').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')abrir();});
-
-/* clave */
-const casillas=$('casillas'),teclado=$('teclado');
-let escrito='',errores=0;
-function reiniciarClave(){
-  escrito='';errores=0;
-  $('pedir').classList.remove('visible');$('laPista').classList.remove('visible');
-  pintar();
-}
-function pintar(){
-  casillas.innerHTML='';
-  for(let i=0;i<Math.max(4,d.clave.length);i++){
-    const c=document.createElement('div');
-    c.className='casilla';
-    if(escrito[i]){
-      c.textContent='•';
-      if(escrito[i]===d.clave[i]){c.classList.add('ok');c.innerHTML='<span class="sg">✓</span>•';}
-      else{c.classList.add('mal');c.innerHTML='<span class="sg">✗</span>•';}
-    }
-    casillas.appendChild(c);
-  }
-}
-function digitar(n){
-  if(escrito.length>=d.clave.length)return;
-  escrito+=n;
-  if(escrito[escrito.length-1]!==d.clave[escrito.length-1]){
-    errores++;
-    if(errores>=3){$('pedir').classList.add('visible');}
-  }
-  pintar();
-  if(escrito.length>=4 && d.clave.startsWith(escrito)) abrir();
-}
-for(let n=1;n<=9;n++){const b=document.createElement('button');b.textContent=n;b.onclick=()=>digitar(String(n));teclado.appendChild(b);}
-const bb=document.createElement('button');bb.textContent='←';bb.setAttribute('aria-label','Borrar');bb.onclick=()=>{escrito=escrito.slice(0,-1);pintar();};teclado.appendChild(bb);
-const b0=document.createElement('button');b0.textContent='0';b0.onclick=()=>digitar('0');teclado.appendChild(b0);
-$('pedir').addEventListener('click',()=>$('laPista').classList.add('visible'));
-reiniciarClave();
-
-/* programada */
-const objetivo=new Date(Date.now()+1000*60*60*24*30);
-$('fechaProg').textContent='Esta carta se abre el '+objetivo.toLocaleDateString('es-CL',{day:'numeric',month:'long',year:'numeric'})+', a las 20:00.';
-setInterval(()=>{
-  const r=objetivo-Date.now();
-  if(r<=0){$('d').textContent='00';$('h').textContent='00';$('m').textContent='00';$('s').textContent='00';return;}
-  const sg=Math.floor(r/1000);
-  $('d').textContent=String(Math.floor(sg/86400)).padStart(2,'0');
-  $('h').textContent=String(Math.floor(sg%86400/3600)).padStart(2,'0');
-  $('m').textContent=String(Math.floor(sg%3600/60)).padStart(2,'0');
-  $('s').textContent=String(sg%60).padStart(2,'0');
-},1000);
-$('saltar').addEventListener('click',e=>{e.preventDefault();abrir();});
-
-/* si / no */
-if(d.propuesta){
-  const no=$('btnNo'),si=$('btnSi'),area=$('areaSi');
-  let n=0;
-  const huir=()=>{
-    n++;
-    no.style.position='absolute';
-    no.style.left=Math.random()*60+'%';
-    no.style.top=Math.random()*60+'%';
-    si.style.fontSize=(1+n*0.16)+'rem';
-    si.style.padding=(13+n*3)+'px '+(26+n*6)+'px';
-    if(n===4)no.textContent='¿Segura?';
-    if(n===7)no.textContent='Última vez';
-  };
-  no.addEventListener('mouseenter',huir);
-  no.addEventListener('click',huir);
-  si.addEventListener('click',()=>{
-    area.style.display='none';
-    $('aceptado').classList.add('visible');
-    const col=['#8E2F2F','#B4552D','#C9A227','#4A5A44','#C0504D'];
-    for(let i=0;i<70;i++){
-      const c=document.createElement('i');
-      c.style.left=Math.random()*100+'%';
-      c.style.background=col[i%col.length];
-      c.style.animationDelay=Math.random()*1.2+'s';
-      $('confeti').appendChild(c);
-    }
-    setTimeout(()=>$('confeti').innerHTML='',4200);
-  });
-}
-
-/* reproductores simulados */
-document.querySelectorAll('.bloque .ico').forEach(b=>{
-  b.addEventListener('click',()=>{
-    const barra=b.parentElement.querySelector('.barra-prog i');
-    if(b.dataset.on==='1'){b.dataset.on='0';b.textContent='▶';return;}
-    b.dataset.on='1';b.textContent='❚❚';
-    let w=0;const t=setInterval(()=>{w+=2;barra.style.width=w+'%';if(w>=100||b.dataset.on==='0'){clearInterval(t);if(w>=100){barra.style.width='0%';b.dataset.on='0';b.textContent='▶';}}},300);
-  });
-});
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Carta de cumpleaños","description":"Carta digital de cumpleaños con fotos, textos, música, voz y video.","offers":{"@type":"Offer","priceCurrency":"CLP","price":"2990","availability":"https://schema.org/InStock"}}
 </script>
 
 </body>
