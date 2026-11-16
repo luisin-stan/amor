@@ -186,6 +186,24 @@ const q=new URLSearchParams(location.search);
 const plan=PLANES[q.get('plan')]||PLANES.completo;
 const $=id=>document.getElementById(id);
 let fotos=[];
+  const CLAVE='cartita_borrador';
+const campos=['de','para','fecha','mensaje','clave','instruccion','pista','apertura','hora','video'];
+function guardar(){
+  const d={fotos:fotos.slice(0,6)};
+  campos.forEach(c=>d[c]=$(c).value);
+  d.modo=(document.querySelector('input[name=modo]:checked')||{}).value;
+  d.cierre=(document.querySelector('input[name=cierre]:checked')||{}).value;
+  try{localStorage.setItem(CLAVE,JSON.stringify(d));}catch(e){}
+}
+function cargar(){
+  let d;try{d=JSON.parse(localStorage.getItem(CLAVE)||'null');}catch(e){return;}
+  if(!d)return;
+  campos.forEach(c=>{if(d[c])$(c).value=d[c];});
+  if(d.fotos&&d.fotos.length){fotos=d.fotos;pintarFotos();}
+  if(d.modo){const r=document.querySelector('input[name=modo][value="'+d.modo+'"]');if(r&&!r.disabled){r.checked=true;r.dispatchEvent(new Event('change'));}}
+  if(d.cierre){const r=document.querySelector('input[name=cierre][value="'+d.cierre+'"]');if(r&&!r.disabled)r.checked=true;}
+  $('cuentaTxt').textContent=$('mensaje').value.length;
+}
 
 $('planInfo').innerHTML='<b>'+plan.n+'</b>'+plan.p.toLocaleString('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0});
 $('total').innerHTML='<small>Total</small>'+plan.p.toLocaleString('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0});
