@@ -171,6 +171,7 @@ audio{width:100%;margin-top:10px}
   <div class="prev-pago">
     <div style="flex:0 0 auto"><small>Total</small><strong id="totalPrev">$4.990</strong></div>
     <button class="btn">Pagar y publicar</button>
+    $('btnPagar').addEventListener('click',()=>{guardar();location.href='pagar.html?plan='+(q.get('plan')||'completo');});
   </div>
 </div>
 
