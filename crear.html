@@ -263,4 +263,66 @@ function pintarFotos(){
 
 /* musica y voz */
 function bloqueAudio(id,etiqueta,tipo){
-  const w
+  const w=document.createElement('div');
+  w.innerHTML='<label>'+etiqueta+'</label><input type="text" placeholder="https://youtu.be/...">';
+  $(id).appendChild(w);
+}
+if(plan.musica>0){for(let i=1;i<=plan.musica;i++)bloqueAudio('zonaMusica','Canción '+i,'musica');}
+else $('secMusica').style.display='none';
+
+if(plan.voz>0){
+  for(let i=1;i<=plan.voz;i++){
+    const w=document.createElement('div');
+    w.innerHTML='<div class="grabar"><button type="button">● Grabar</button><span class="est"></span></div><audio controls style="display:none"></audio>';
+    const b=w.querySelector('button'),au=w.querySelector('audio'),est=w.querySelector('.est');
+    let rec=null,trozos=[];
+    b.onclick=async()=>{
+      if(rec&&rec.state==='recording'){rec.stop();return;}
+      try{
+        const st=await navigator.mediaDevices.getUserMedia({audio:true});
+        rec=new MediaRecorder(st);trozos=[];
+        rec.ondataavailable=e=>trozos.push(e.data);
+        rec.onstop=()=>{
+          st.getTracks().forEach(t=>t.stop());
+          au.src=URL.createObjectURL(new Blob(trozos));
+          au.style.display='block';b.textContent='● Grabar de nuevo';b.classList.remove('grabando');est.textContent='Grabado';
+        };
+        rec.start();b.textContent='■ Detener';b.classList.add('grabando');est.textContent='Grabando…';
+        setTimeout(()=>{if(rec.state==='recording')rec.stop();},60000);
+      }catch(err){est.textContent='Sin permiso de micrófono. Sube un archivo.';}
+    };
+    $('zonaVoz').appendChild(w);
+  }
+}else $('secVoz').style.display='none';
+
+if(!plan.video)$('secVideo').style.display='none';
+
+$('mensaje').addEventListener('input',e=>$('cuentaTxt').textContent=e.target.value.length);
+
+/* vista previa */
+$('btnPrev').addEventListener('click',()=>{
+  const de=$('de').value||'Alguien',para=$('para').value||'ti',msg=$('mensaje').value;
+  const modo=document.querySelector('input[name=modo]:checked').value;
+  const cierre=document.querySelector('input[name=cierre]:checked').value;
+  let cab='<p style="font-family:var(--sans);font-size:.8rem;color:var(--gris);margin:0 0 6px">'+cierre+' · '+modo+'</p>';
+  if(modo==='clave')cab+='<p style="font-family:var(--sans);font-size:.85rem;background:#F2EDE3;padding:8px 12px;border-radius:6px">'+($('instruccion').value||'Escribe la fecha')+'</p>';
+  if(modo==='programada')cab+='<p style="font-family:var(--sans);font-size:.85rem;background:#F2EDE3;padding:8px 12px;border-radius:6px">Se abre el '+($('apertura').value||'—')+' a las '+($('hora').value||'20:00')+'</p>';
+  $('prevCarta').innerHTML=cab+'<p style="font-family:var(--sans);color:var(--gris)">de '+de+' · Para '+para+'</p><h3>'+(msg.split('\n')[0]||'Tu carta')+'</h3>'+
+    msg.split('\n').slice(1).map(l=>'<p>'+l+'</p>').join('')+
+    '<div class="pg">'+fotos.map(f=>'<img src="'+f+'" alt="">').join('')+'</div>';
+  $('prev').classList.add('visible');window.scrollTo(0,0);
+});
+$('cerrarPrev').addEventListener('click',()=>$('prev').classList.remove('visible'));
+
+/* guardado automático y restauración */
+document.querySelectorAll('input,textarea,select').forEach(el=>{
+  el.addEventListener('change',guardar);
+  if(el.tagName==='TEXTAREA'||el.type==='text')el.addEventListener('input',guardar);
+});
+cargar();
+
+$('btnPagar').addEventListener('click',()=>{guardar();location.href='pagar.html?plan='+(q.get('plan')||'completo');});
+</script>
+
+</body>
+</html>
