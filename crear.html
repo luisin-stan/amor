@@ -170,10 +170,10 @@ audio{width:100%;margin-top:10px}
   <div class="prev-carta" id="prevCarta"></div>
   <div class="prev-pago">
     <div style="flex:0 0 auto"><small>Total</small><strong id="totalPrev">$4.990</strong></div>
-    <button class="btn">Pagar y publicar</button>
+    <button class="btn" id="btnPagar">Pagar y publicar</button>
   </div>
 </div>
-$('btnPagar').addEventListener('click',()=>{guardar();location.href='pagar.html?plan='+(q.get('plan')||'completo');});
+
 <script>
 const PLANES={
   esencial:{n:'Esencial',p:2990,fotos:3,musica:0,voz:0,video:false,cierres:['sobre','nota'],modos:['abierta']},
@@ -195,11 +195,7 @@ function guardar(){
   d.cierre=(document.querySelector('input[name=cierre]:checked')||{}).value;
   try{localStorage.setItem(CLAVE,JSON.stringify(d));}catch(e){}
 }
-  document.querySelectorAll('input,textarea,select').forEach(el=>{
-  el.addEventListener('change',guardar);
-  if(el.tagName==='TEXTAREA'||el.type==='text')el.addEventListener('input',guardar);
-});
-cargar();
+  
 function cargar(){
   let d;try{d=JSON.parse(localStorage.getItem(CLAVE)||'null');}catch(e){return;}
   if(!d)return;
