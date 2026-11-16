@@ -186,7 +186,7 @@ audio{width:100%;margin-top:10px}
     <button class="btn" id="btnPagar">Pagar y publicar</button>
   </div>
 </div>
-
+<script src="plantillas.js"></script>
 <script>
 const PLANES={
   esencial:{n:'Esencial',p:2990,fotos:3,musica:0,voz:0,video:false,cierres:['sobre','nota'],modos:['abierta']},
@@ -200,7 +200,7 @@ const plan=PLANES[q.get('plan')]||PLANES.completo;
 const $=id=>document.getElementById(id);
 let fotos=[];
   const CLAVE='cartita_borrador';
-const campos=['de','para','fecha','mensaje','clave','instruccion','pista','apertura','hora','video'];
+const campos=['de','para','fecha','mensaje','clave','instruccion','pista','apertura','hora','video','diseno'];
 function guardar(){
   const d={fotos:fotos.slice(0,6)};
   campos.forEach(c=>d[c]=$(c).value);
@@ -216,6 +216,7 @@ function cargar(){
   if(d.fotos&&d.fotos.length){fotos=d.fotos;pintarFotos();}
   if(d.modo){const r=document.querySelector('input[name=modo][value="'+d.modo+'"]');if(r&&!r.disabled){r.checked=true;r.dispatchEvent(new Event('change'));}}
   if(d.cierre){const r=document.querySelector('input[name=cierre][value="'+d.cierre+'"]');if(r&&!r.disabled)r.checked=true;}
+  if(d.diseno){const b=document.querySelector('.dis[data-id="'+d.diseno+'"]');if(b&&!b.classList.contains('bloq')){document.querySelectorAll('.dis').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');$('diseno').value=d.diseno;}}
   $('cuentaTxt').textContent=$('mensaje').value.length;
 }
 
@@ -241,6 +242,24 @@ document.querySelectorAll('input[name=modo]').forEach(r=>r.addEventListener('cha
   $('zonaClave').style.display=r.value==='clave'&&r.checked?'block':'none';
   $('zonaProg').style.display=r.value==='programada'&&r.checked?'block':'none';
 }));
+
+/* diseños */
+const permitidos=plan.n==='Esencial'?['esencial']:plan.n==='Completo'?['esencial','completo']:['esencial','completo','premium'];
+PLANTILLAS.forEach(t=>{
+  const libre=permitidos.includes(t.plan);
+  const b=document.createElement('button');
+  b.type='button';b.className='dis'+(libre?'':' bloq');b.dataset.id=t.id;
+  b.setAttribute('aria-pressed',t.id==='papel'?'true':'false');
+  b.innerHTML='<span class="mu" style="background:'+t.bg+';color:'+t.ac+';font-family:'+(t.f==='serif'?'var(--serif)':'var(--sans)')+'">Aa</span><span class="nm">'+t.n+'</span>'+(libre?'':'<span class="tag">'+t.plan+'</span>');
+  if(libre)b.onclick=()=>{
+    document.querySelectorAll('.dis').forEach(x=>x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    $('diseno').value=t.id;guardar();
+  };
+  $('opDiseno').appendChild(b);
+});
+
+/* fotos */
 
 /* fotos */
 $('inputFotos').addEventListener('change',async e=>{
