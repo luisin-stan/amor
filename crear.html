@@ -88,6 +88,7 @@ audio{width:100%;margin-top:10px}
 
 <div class="wrap">
   <h1>Escribe tu cartita</h1>
+  <p id="vence" style="font-size:.8rem;color:var(--gris);margin:0 0 6px"></p>
   <p class="sub">Todo lo que pongas acá se ve en la vista previa. Nada se publica hasta que pagues.</p>
 
   <section>
@@ -136,6 +137,7 @@ audio{width:100%;margin-top:10px}
     <p class="ayuda">El fondo, la letra y el color de tu carta.</p>
     <div class="disenos" id="opDiseno"></div>
     <input type="hidden" id="diseno" value="papel">
+    <p id="zonaMejorar" style="margin-top:14px"></p>
   </section>
 
   <section>
@@ -184,6 +186,12 @@ audio{width:100%;margin-top:10px}
   <div class="prev-pago">
     <div style="flex:0 0 auto"><small>Total</small><strong id="totalPrev">$4.990</strong></div>
     <button class="btn" id="btnPagar">Pagar y publicar</button>
+    if(plan.n!=='Premium'){
+  const sig=plan.n==='Esencial'?'completo':'premium';
+  const nm=sig==='premium'?'Premium':'Completo';
+  const pr=PLANES[sig].p.toLocaleString('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0});
+  $('zonaMejorar').innerHTML='<a class="btn" style="display:block" href="crear.html?plan='+sig+'&cat='+cat+'">Mejorar a '+nm+' por '+pr+'</a>';
+}
   </div>
 </div>
 <script src="plantillas.js"></script>
@@ -197,7 +205,9 @@ const PLANES={
 const CIERRES=[['sobre','Sobre con lacre'],['nota','Nota doblada'],['polaroid','Polaroid'],['caja','Caja de regalo'],['frasco','Frasco'],['vinilo','Vinilo'],['pelicula','Película'],['avion','Avión']];
 const MODOS=[['abierta','Abierta'],['clave','Con clave'],['programada','Programada']];
 const q=new URLSearchParams(location.search);
-  const cat=q.get('cat')||'cumpleanos';
+const cat=q.get('cat')||'cumpleanos';
+const plan=PLANES[q.get('plan')]||PLANES.completo;
+document.querySelector('header a').href=cat+'.html';
 document.querySelector('header a').href=cat+'.html';
 const plan=PLANES[q.get('plan')]||PLANES.completo;
 const $=id=>document.getElementById(id);
@@ -350,6 +360,9 @@ $('btnPrev').addEventListener('click',()=>{
   $('prev').classList.add('visible');window.scrollTo(0,0);
 });
 $('cerrarPrev').addEventListener('click',()=>$('prev').classList.remove('visible'));
+
+const m=document.getElementById('marca');
+for(let i=0;i<24;i++){const s=document.createElement('span');s.textContent='VISTA PREVIA · CARTITA';m.appendChild(s);}
 
 /* guardado automático y restauración */
 document.querySelectorAll('input,textarea,select').forEach(el=>{
