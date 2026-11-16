@@ -188,6 +188,7 @@ audio{width:100%;margin-top:10px}
 </div>
 <script src="plantillas.js"></script>
 <script>
+  $('btnPagar').addEventListener('click',()=>{guardar();location.href='pagar.html?plan='+(q.get('plan')||'completo')+'&cat='+cat;});
 const PLANES={
   esencial:{n:'Esencial',p:2990,fotos:3,musica:0,voz:0,video:false,cierres:['sobre','nota'],modos:['abierta']},
   completo:{n:'Completo',p:4990,fotos:15,musica:1,voz:1,video:false,cierres:['sobre','nota','polaroid','caja'],modos:['abierta','clave']},
