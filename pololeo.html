@@ -1,0 +1,167 @@
+<!-- ARCHIVO: pololeo.html -->
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta para pedir pololeo — Cartita</title>
+<meta name="description" content="Pídeselo con una carta que se abre sola. Fotos, textos, música, voz y tu video, enviada a su celular. Desde $2.990 CLP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--crema:#F7F3EC;--tinta:#1F1B16;--lacre:#C0504D;--oliva:#4A5A44;--gris:#6B635A;--linea:#DED6C8;--blanco:#FFFDF9;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crema);color:var(--tinta);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:78px}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
+a{color:inherit}
+header{padding:22px 0;border-bottom:1px solid var(--linea)}
+.cab{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.logo{font-family:var(--serif);font-size:1.5rem;font-weight:600;text-decoration:none}
+.logo span{color:var(--lacre)}
+.volver{font-size:.85rem;text-decoration:none;color:var(--gris);border:1px solid var(--linea);padding:7px 14px;border-radius:100px}
+.miga{font-size:.85rem;color:var(--gris);padding:20px 0 0}
+.miga a{text-decoration:none}
+.cabeza{padding:26px 0 30px}
+.cabeza h1{font-size:clamp(1.9rem,5vw,3rem)}
+.cabeza p{color:var(--gris);max-width:52ch;margin:14px 0 22px;font-size:1.05rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;text-align:center;padding:14px 24px;border-radius:100px;font-weight:600;text-decoration:none;border:1.5px solid var(--tinta);transition:.2s}
+.btn:hover{background:var(--tinta);color:var(--crema)}
+.btn-p{background:var(--lacre);border-color:var(--lacre);color:#fff}
+.sello-conf{display:flex;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--gris);margin-top:18px}
+.sello-conf span::before{content:"✓ ";color:var(--oliva);font-weight:700}
+section{padding:42px 0}
+.eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--oliva);font-weight:600;margin-bottom:12px}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:10px}
+.intro{color:var(--gris);max-width:52ch;margin:0 0 28px}
+.video-caja{max-width:290px;margin:0 auto;aspect-ratio:9/16;border-radius:16px;border:1px solid var(--linea);background:linear-gradient(165deg,#F6DEDE,#C0504D);display:grid;place-items:center;position:relative}
+.video-caja .play{width:64px;height:64px;border-radius:50%;background:rgba(255,253,249,.92);display:grid;place-items:center;border:0;cursor:pointer}
+.video-caja .play::after{content:"";border-left:18px solid var(--lacre);border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+.video-caja .rot{position:absolute;bottom:14px;font-size:.78rem;color:#fff}
+.planes{display:grid;gap:16px}
+@media(min-width:820px){.planes{grid-template-columns:repeat(3,1fr);align-items:start}}
+.plan{position:relative;background:var(--blanco);border:1.5px solid var(--linea);border-radius:12px;padding:26px 22px 22px}
+.plan.dest{border-color:var(--lacre);box-shadow:0 14px 34px rgba(192,80,77,.16)}
+.badge{position:absolute;top:-12px;left:22px;background:var(--lacre);color:#fff;font-size:.72rem;font-weight:600;text-transform:uppercase;padding:5px 12px;border-radius:100px}
+.plan h3{font-size:1.35rem}
+.plan .precio{font-family:var(--serif);font-size:2rem;margin:10px 0 0}
+.plan .precio small{font-family:var(--sans);font-size:.78rem;color:var(--gris);font-weight:400}
+.usd{font-size:.76rem;color:var(--gris);margin:2px 0 0}
+.plan .resumen{font-size:.9rem;color:var(--gris);margin:14px 0 18px;min-height:2.6em}
+.plan ul{list-style:none;padding:0;margin:0 0 22px;font-size:.93rem}
+.plan li{padding:7px 0 7px 26px;position:relative;border-bottom:1px solid #F0EAE0}
+.plan li:last-child{border-bottom:0}
+.plan li.si::before{content:"✓";position:absolute;left:0;color:var(--oliva);font-weight:700}
+.plan li.no{color:#A69C90}
+.plan li.no::before{content:"—";position:absolute;left:0}
+.plan .btn{display:block}
+.nota{font-size:.85rem;color:var(--gris);margin-top:20px}
+.pie-legal{font-size:.76rem;color:var(--gris);margin-top:12px}
+.cierres{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:760px){.cierres{grid-template-columns:repeat(4,1fr)}}
+.cierre{border:1px solid var(--linea);border-radius:10px;background:var(--blanco);overflow:hidden;text-decoration:none;display:block;transition:.2s}
+.cierre:hover{border-color:var(--tinta);transform:translateY(-3px)}
+.demo{height:96px;position:relative;background:repeating-linear-gradient(45deg,#FBF6EC,#FBF6EC 8px,#F6EFE2 8px,#F6EFE2 16px);display:grid;place-items:center}
+.cierre .lbl{padding:10px 12px 12px;font-size:.84rem}
+.cierre .lbl b{display:block;font-family:var(--serif);font-size:.98rem}
+.cierre .lbl small{color:var(--gris);font-size:.74rem}
+.forma{background:var(--blanco);border:1.5px solid var(--tinta);position:relative}
+.f-sobre{width:64px;height:42px;border-radius:3px}
+.f-sobre::after{content:"";position:absolute;inset:0;background:var(--blanco);border:1.5px solid var(--tinta);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;animation:a-abre 6s ease-in-out infinite}
+.f-sobre::before{content:"";position:absolute;left:50%;top:14px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--lacre);z-index:2;animation:a-sello 6s ease-in-out infinite}
+.f-nota{width:44px;height:52px;border-radius:2px;animation:a-dobla 6s ease-in-out infinite}
+.f-pola{width:48px;height:56px;border-radius:2px;padding:5px 5px 14px;animation:a-gira 6s ease-in-out infinite}
+.f-pola::after{content:"";position:absolute;inset:5px 5px 14px;background:linear-gradient(160deg,#F6DEDE,#C0504D)}
+.f-caja{width:54px;height:38px;border-radius:3px;align-self:end;margin-bottom:22px}
+.f-caja::before{content:"";position:absolute;left:-5px;right:-5px;top:-12px;height:14px;background:var(--blanco);border:1.5px solid var(--tinta);border-radius:3px;transform-origin:left;animation:a-tapa 6s ease-in-out infinite}
+.f-frasco{width:34px;height:44px;border-radius:4px 4px 8px 8px;background:#EFEAE0}
+.f-frasco::before{content:"";position:absolute;left:50%;top:26px;width:16px;height:0;margin-left:-8px;background:var(--crema);border:1.5px solid var(--tinta);animation:a-sube 6s ease-in-out infinite}
+.f-vinilo{width:58px;height:52px;border-radius:3px}
+.f-vinilo::before{content:"";position:absolute;right:4px;top:50%;width:34px;height:34px;margin-top:-17px;border-radius:50%;background:radial-gradient(circle,#C9A227 0 4px,#2A2621 5px 100%);animation:a-sale 6s ease-in-out infinite}
+.f-peli{width:62px;height:38px;border-radius:2px;display:flex;gap:3px;padding:4px;animation:a-tira 6s ease-in-out infinite}
+.f-peli i{flex:1;height:100%;background:linear-gradient(160deg,#DDD8E0,#4A2436);border-radius:1px}
+.f-avion{width:44px;height:44px;border:0;clip-path:polygon(0 45%,100% 0,62% 100%,52% 58%);animation:a-vuela 6s ease-in-out infinite}
+@keyframes a-abre{0%,15%{transform:rotateX(0)}45%,80%{transform:rotateX(-170deg)}100%{transform:rotateX(0)}}
+@keyframes a-sello{0%,15%{opacity:1}24%,90%{opacity:0}100%{opacity:1}}
+@keyframes a-dobla{0%,20%{transform:scaleY(.45)}55%,85%{transform:scaleY(1)}100%{transform:scaleY(.45)}}
+@keyframes a-gira{0%,20%{transform:rotateY(0)}60%,85%{transform:rotateY(180deg)}100%{transform:rotateY(0)}}
+@keyframes a-tapa{0%,20%{transform:rotate(0)}55%,85%{transform:rotate(-28deg)}100%{transform:rotate(0)}}
+@keyframes a-sube{0%,20%{height:0;top:26px}55%,85%{height:26px;top:8px}100%{height:0;top:26px}}
+@keyframes a-sale{0%,20%{transform:translateX(0)}55%,85%{transform:translateX(-22px)}100%{transform:translateX(0)}}
+@keyframes a-tira{0%,20%{transform:translateX(0)}55%,85%{transform:translateX(-8px)}100%{transform:translateX(0)}}
+@keyframes a-vuela{0%,20%{transform:none}55%,85%{transform:translate(10px,-8px) rotate(14deg)}100%{transform:none}}
+details{border-bottom:1px solid var(--linea);padding:16px 0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--lacre);font-size:1.3rem}
+details[open] summary::after{content:"–"}
+details p{color:var(--gris);margin:12px 0 0}
+footer{background:var(--tinta);color:#CFC6BA;padding:40px 0 30px;font-size:.88rem}
+footer a{text-decoration:none;display:block;margin-bottom:7px}
+.barra{position:fixed;left:0;right:0;bottom:0;background:var(--blanco);border-top:1px solid var(--linea);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:20}
+.barra b{font-family:var(--serif);font-size:1.05rem}
+@media(min-width:820px){.barra{display:none}body{padding-bottom:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap cab"><a class="logo" href="index.html">carti<span>ta</span></a><a class="volver" href="index.html">← Volver al inicio</a></div></header>
+<div class="wrap">
+  <p class="miga"><a href="index.html">Inicio</a> / Pedir pololeo</p>
+  <div class="cabeza">
+    <h1>Carta para pedir pololeo</h1>
+    <p>Pídeselo con una carta que se abre sola. Adentro hay fotos, tu voz y un "¿quieres pololear conmigo?" que no se puede esquivar.</p>
+    <div class="cta"><a class="btn btn-p" href="#planes">Elegir mi plan</a><a class="btn" href="ejemplo.html?cat=pololeo">Ver ejemplo completo</a></div>
+    <div class="sello-conf"><span>Sin marca de agua</span><span>Online hasta el día + 30</span><span>Código de recuperación</span></div>
+  </div>
+</div>
+<section class="wrap">
+  <p class="eyebrow">Ejemplo</p>
+  <h2>Así se ve una pedida de pololeo</h2>
+  <p class="intro">Incluye el botón "No" que se arranca y el "Sí" que crece. Entra y pruébalo.</p>
+  <div class="video-caja"><button class="play" aria-label="Reproducir video"></button><span class="rot">Video de ejemplo · 20 s</span></div>
+</section>
+<section class="wrap" id="planes">
+  <p class="eyebrow">Elige tu plan</p>
+  <h2>Tres formas de decirlo</h2>
+  <p class="intro">Todos los planes se entregan sin marca de agua. Puedes cambiar de plan antes de pagar.</p>
+  <div class="planes">
+    <div class="plan"><h3>Esencial</h3><p class="precio">$2.990 <small>CLP</small></p><p class="usd">≈ USD $3</p><p class="resumen">La pregunta, simple y directa.</p>
+      <ul><li class="si">3 fotos</li><li class="si">Texto libre</li><li class="si">Cierre en sobre o nota</li><li class="si">3 diseños</li><li class="si">Se abre al instante</li><li class="no">Sin música</li><li class="no">Sin voz</li><li class="no">Sin video</li><li class="no">Sin clave ni programación</li></ul>
+      <a class="btn" href="crear.html?plan=esencial">Elegir Esencial</a></div>
+    <div class="plan dest"><span class="badge">El más elegido</span><h3>Completo</h3><p class="precio">$4.990 <small>CLP</small></p><p class="usd">≈ USD $5</p><p class="resumen">Con tu voz y su canción. Así sí que cuesta decir no.</p>
+      <ul><li class="si">15 fotos</li><li class="si">1 canción</li><li class="si">1 nota de voz</li><li class="si">Todos los cierres</li><li class="si">Todos los diseños</li><li class="si">Clave opcional</li><li class="no">Sin video</li><li class="no">Sin programar</li></ul>
+      <a class="btn btn-p" href="crear.html?plan=completo">Elegir Completo</a></div>
+    <div class="plan"><h3>Premium</h3><p class="precio">$9.990 <small>CLP</small></p><p class="usd">≈ USD $10</p><p class="resumen">Para que no le quede ninguna duda.</p>
+      <ul><li class="si">30 fotos</li><li class="si">2 canciones</li><li class="si">2 notas de voz</li><li class="si">Video tuyo, hasta 90 s</li><li class="si">Diseños exclusivos</li><li class="si">Clave opcional</li><li class="si">Programada para el día</li></ul>
+      <a class="btn" href="crear.html?plan=premium">Elegir Premium</a></div>
+  </div>
+  <p class="nota">El video lo subes tú, desde tu celular. Hasta 90 segundos.</p>
+  <p class="pie-legal">Precios en pesos chilenos, IVA incluido. La conversión a dólar es solo referencial.</p>
+</section>
+<section class="wrap">
+  <p class="eyebrow">Formas de abrir</p><h2>Cómo va a llegar</h2>
+  <p class="intro">El cierre es el envoltorio. Adentro va la carta. Toca uno para verlo.</p>
+  <div class="cierres">
+    <a class="cierre" href="ejemplo.html?cat=pololeo"><span class="demo"><span class="forma f-sobre"></span></span><span class="lbl"><b>Sobre con lacre</b><small>Los 3 planes</small></span></a>
+    <a class="cierre" href="ejemplo.html?cat=pololeo"><span class="demo"><span class="forma f-nota"></span></span><span class="lbl"><b>Nota doblada</b><small>Los 3 planes</small></span></a>
+    <a class="cierre" href="ejemplo.html?cat=pololeo"><span class="demo"><span class="forma f-pola"></span></span><span class="lbl"><b>Polaroid</b><small>Completo y Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cat=pololeo"><span class="demo"><span class="forma f-caja"></span></span><span class="lbl"><b>Caja de regalo</b><small>Completo y Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cat=pololeo"><span class="demo"><span class="forma f-frasco"></span></span><span class="lbl"><b>Frasco</b><small>Solo Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cat=pololeo"><span class="demo"><span class="forma f-vinilo"></span></span><span class="lbl"><b>Vinilo</b><small>Solo Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cat=pololeo"><span class="demo"><span class="forma f-peli"><i></i><i></i><i></i></span></span><span class="lbl"><b>Película</b><small>Solo Premium</small></span></a>
+    <a class="cierre" href="ejemplo.html?cat=pololeo"><span class="demo"><span class="forma f-avion"></span></span><span class="lbl"><b>Avión de papel</b><small>Solo Premium</small></span></a>
+  </div>
+</section>
+<section class="wrap">
+  <p class="eyebrow">Preguntas</p><h2>Sobre las pedidas de pololeo</h2>
+  <details><summary>¿Y si dice que no?</summary><p>El botón "No" se arranca y el "Sí" crece cada vez. Casi nadie escapa.</p></details>
+  <details><summary>¿Cuánto tiempo queda online?</summary><p>Hasta el día y 30 días después, con mínimo de 60 días. Se puede extender a un año por $1.990.</p></details>
+  <details><summary>¿Puedo editarla después?</summary><p>Sí, todas las veces que quieras antes de que la abran.</p></details>
+</section>
+<footer><div class="wrap"><a href="index.html">Inicio</a><a href="terminos.html">Términos</a><a href="privacidad.html">Privacidad</a><a href="mailto:soporte@cartita.cl">Soporte</a><p class="pie-legal" style="color:#A69C90">Precios en pesos chilenos (CLP), IVA incluido.</p><p style="font-size:.8rem;opacity:.7">© 2026 Cartita</p></div></footer>
+<div class="barra"><span>desde <b>$2.990</b> CLP</span><a class="btn btn-p" href="#planes">Elegir plan</a></div>
+</body>
+</html>
