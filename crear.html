@@ -196,6 +196,8 @@ const PLANES={
 const CIERRES=[['sobre','Sobre con lacre'],['nota','Nota doblada'],['polaroid','Polaroid'],['caja','Caja de regalo'],['frasco','Frasco'],['vinilo','Vinilo'],['pelicula','Película'],['avion','Avión']];
 const MODOS=[['abierta','Abierta'],['clave','Con clave'],['programada','Programada']];
 const q=new URLSearchParams(location.search);
+  const cat=q.get('cat')||'cumpleanos';
+document.querySelector('header a').href=cat+'.html';
 const plan=PLANES[q.get('plan')]||PLANES.completo;
 const $=id=>document.getElementById(id);
 let fotos=[];
@@ -207,6 +209,8 @@ function guardar(){
   d.modo=(document.querySelector('input[name=modo]:checked')||{}).value;
   d.cierre=(document.querySelector('input[name=cierre]:checked')||{}).value;
   try{localStorage.setItem(CLAVE,JSON.stringify(d));}catch(e){}
+  const m=document.getElementById('marca');
+for(let i=0;i<24;i++){const s=document.createElement('span');s.textContent='VISTA PREVIA · CARTITA';m.appendChild(s);}
 }
   
 function cargar(){
