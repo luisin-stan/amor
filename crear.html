@@ -195,6 +195,11 @@ function guardar(){
   d.cierre=(document.querySelector('input[name=cierre]:checked')||{}).value;
   try{localStorage.setItem(CLAVE,JSON.stringify(d));}catch(e){}
 }
+  document.querySelectorAll('input,textarea,select').forEach(el=>{
+  el.addEventListener('change',guardar);
+  if(el.tagName==='TEXTAREA'||el.type==='text')el.addEventListener('input',guardar);
+});
+cargar();
 function cargar(){
   let d;try{d=JSON.parse(localStorage.getItem(CLAVE)||'null');}catch(e){return;}
   if(!d)return;
