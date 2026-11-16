@@ -1,0 +1,81 @@
+<!-- ARCHIVO: pagar.html -->
+<!doctype html><html lang="es-CL"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagar mi cartita — Cartita</title><meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css"><style>:root{--lacre:#8E2F2F}</style></head><body>
+<header><div class="wrap cab"><a class="logo" href="index.html">carti<span>ta</span></a><a class="volver" href="crear.html">← Volver al editor</a></div></header>
+<div class="wrap" style="max-width:620px;padding:30px 20px 60px">
+<h1 style="font-size:1.7rem">Pagar y publicar</h1>
+<p style="color:var(--gris);margin:8px 0 24px">Tu carta está lista. Elige cómo pagar.</p>
+
+<div class="recuadro" style="max-width:none;text-align:left">
+  <div style="display:flex;justify-content:space-between;font-size:.95rem;padding-bottom:12px;border-bottom:1px solid var(--linea)">
+    <span>Plan <b id="nomPlan">—</b></span><b id="monto">—</b>
+  </div>
+  <p style="font-size:.78rem;color:var(--gris);margin:12px 0 0">Precio en pesos chilenos, IVA incluido. Pago único.</p>
+</div>
+
+<h2 style="font-size:1.05rem;margin:28px 0 10px">Con tarjeta</h2>
+<button class="btn btn-p" style="width:100%" id="tarjeta">Pagar con Webpay o tarjeta</button>
+<p style="font-size:.78rem;color:var(--gris);margin:8px 0 0">Débito, crédito y Cuenta RUT. Si tu Cuenta RUT tiene bloqueadas las compras por internet, actívalas en la app de BancoEstado.</p>
+
+<h2 style="font-size:1.05rem;margin:28px 0 10px">Por transferencia</h2>
+<div class="recuadro" style="max-width:none;text-align:left;font-size:.9rem">
+  <p style="margin:0 0 10px">Transfiere el monto exacto y después aprieta el botón de abajo.</p>
+  <p style="margin:0 0 4px"><b>Titular</b> <span data-banco="titular"></span></p>
+  <p style="margin:0 0 4px"><b>RUT</b> <span data-banco="rut"></span></p>
+  <p style="margin:0 0 4px"><b>Banco</b> <span data-banco="banco"></span></p>
+  <p style="margin:0 0 4px"><b>Tipo</b> <span data-banco="tipo"></span></p>
+  <p style="margin:0 0 4px"><b>Cuenta</b> <span data-banco="numero"></span></p>
+  <p style="margin:0 0 10px"><b>Correo</b> <span data-banco="correo"></span></p>
+  <button class="btn" style="width:100%" id="copiar">Copiar los datos</button>
+</div>
+
+<button class="btn btn-p" style="width:100%;margin-top:18px" id="transferi">Ya transferí, publicar mi carta</button>
+<p class="aviso" id="aviso"></p>
+</div>
+<footer><div class="wrap"><a href="index.html">Inicio</a><a href="terminos.html">Términos</a><a href="privacidad.html">Privacidad</a><a href="mailto:soporte@cartita.cl">Soporte</a></div></footer>
+<script src="config.js"></script>
+<script>
+const q=new URLSearchParams(location.search);
+const p=q.get('plan')||'completo';
+const PRECIOS=CONFIG.precios;
+const NOMBRES={esencial:'Esencial',completo:'Completo',premium:'Premium'};
+const monto=PRECIOS[p]||PRECIOS.completo;
+const fmt=n=>n.toLocaleString('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0});
+document.getElementById('nomPlan').textContent=NOMBRES[p]||'Completo';
+document.getElementById('monto').textContent=fmt(monto);
+document.querySelectorAll('[data-banco]').forEach(el=>el.textContent=CONFIG.banco[el.dataset.banco]);
+
+document.getElementById('copiar').addEventListener('click',()=>{
+  const b=CONFIG.banco;
+  const t='Titular: '+b.titular+'\nRUT: '+b.rut+'\nBanco: '+b.banco+'\nTipo: '+b.tipo+'\nCuenta: '+b.numero+'\nCorreo: '+b.correo+'\nMonto: '+fmt(monto);
+  navigator.clipboard.writeText(t);
+  const a=document.getElementById('aviso');a.className='aviso bueno visible';a.textContent='Datos copiados.';
+});
+
+document.getElementById('tarjeta').addEventListener('click',()=>{
+  const a=document.getElementById('aviso');
+  a.className='aviso mal visible';
+  a.textContent=CONFIG.flow.activo?'Redirigiendo a Flow…':'Falta conectar Flow. Por ahora usa la transferencia.';
+});
+
+function codigo(){
+  const c='ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+  const g=n=>Array.from({length:n},()=>c[Math.floor(Math.random()*c.length)]).join('');
+  return 'AMR-'+g(4)+'-'+g(4);
+}
+document.getElementById('transferi').addEventListener('click',()=>{
+  let b;try{b=JSON.parse(localStorage.getItem('cartita_borrador')||'null');}catch(e){}
+  if(!b){location.href='crear.html';return;}
+  b.codigo=codigo();
+  b.plan=p;
+  b.monto=monto;
+  b.pagado=new Date().toISOString();
+  b.vence=new Date(Date.now()+1000*60*60*24*60).toISOString();
+  localStorage.setItem('cartita_pagado',JSON.stringify(b));
+  location.href='carta.html';
+});
+</script>
+</body></html>
