@@ -239,7 +239,13 @@ const CATS={
     clave:'2211',pista:'Escribe tu fecha de nacimiento',pista2:'Veintidós de noviembre. La misma que la del asado.'},
   agradecimiento:{de:'Valentina',para:'Tía Rosa',titulo:'Gracias, tía Rosa',fecha:'Para ti',lacre:'#6B635A',cierre:'Gracias, en serio.',firma:'Valentina',
     msj:['Tía Rosa:','Cuando todos miraban para otro lado, usted no.','Nunca le he dicho esto en persona y ya era hora: gracias por haberme recibido cuando no tenía dónde estar.'],
-    clave:'2019',pista:'Escribe el año en que me recibiste en tu casa',pista2:'Fue el año de la mudanza. Dos mil diecinueve.'}
+    clave:'2019',pista:'Escribe el año en que me recibiste en tu casa',pista2:'Fue el año de la mudanza. Dos mil diecinueve.'} 
+  navidad:{de:'Andrea Fuentes',para:'La familia',titulo:'Feliz Navidad',fecha:'Navidad · 24 de diciembre',lacre:'#1F4436',cierre:'Los quiero.',firma:'Andrea',
+    msj:['Familia:','Este año fue de todo, pero mirando estas fotos me doy cuenta de que lo que se salvó fue lo importante: nosotros.','No tengo plata para regalos grandes. Tengo esto, que es lo que de verdad quería decirles.'],
+    clave:'2412',pista:'Escribe la fecha de Navidad',pista2:'Veinticuatro de diciembre. La misma del árbol.'},
+  'ano-nuevo':{de:'Sebastián Ortiz',para:'Los que quiero',titulo:'Feliz Año Nuevo',fecha:'Año Nuevo · 31 de diciembre',lacre:'#8A6A2F',cierre:'Que sea un buen año.',firma:'Sebastián',
+    msj:['Para los que estuvieron:','No voy a hacer la lista de propósitos que nunca cumplo. Voy a hacer la lista de ustedes.','Gracias por el año. Ojalá el que viene nos encuentre igual de juntos.'],
+    clave:'3112',pista:'Escribe la fecha de Año Nuevo',pista2:'Treinta y uno de diciembre, a la medianoche.'}
 };
 const p=new URLSearchParams(location.search);
 const k=CATS[p.get('cat')]?p.get('cat'):'cumpleanos';
