@@ -15,7 +15,7 @@
   --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--crema);color:var(--tinta);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{margin:0;color:var(--tinta);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 20px}
 h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
 a{color:inherit}
@@ -82,8 +82,48 @@ footer .cols{display:grid;gap:26px;margin-bottom:30px}
 footer a{text-decoration:none;display:block;margin-bottom:8px}
 footer a:hover{color:#fff}
 footer .firma{font-family:var(--serif);color:#fff;font-size:1.2rem;margin-bottom:10px}
-.pie-legal{font-size:.76rem;color:#A69C90;margin:14px 0 0;line-height:1.5}
+.pie-lega{font-size:.76rem;color:var(--gris);margin:14px 0 0;line-height:1.5}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+/* ===== FLORES DE PORTADA ===== */
+body{
+  background-color:var(--crema);
+  color:var(--tinta);
+  background-image:
+    url("img/flores-esquina-der.png"),
+    url("img/flores-esquina-izq.png"),
+    url("img/flores-hero.png");
+  background-repeat:no-repeat,no-repeat,no-repeat;
+  background-position:
+    right -58px top 88px,
+    left -58px top 88px,
+    top center;
+  background-size:
+    clamp(150px,26vw,250px) auto,
+    clamp(150px,26vw,250px) auto,
+    100% auto;
+}
+
+h1,h2,h3,h4{color:var(--tinta)}
+p,li,span,label{color:var(--gris)}
+a{color:var(--lacre)}
+.logo{color:var(--tinta)}
+.pie-lega{color:var(--gris)}
+
+/* franja para separar secciones */
+.divisor-flores{
+  display:block;
+  width:min(430px,86vw);
+  height:auto;
+  margin:34px auto;
+  opacity:.9;
+}
+
+/* en teléfono los ramos van más chicos */
+@media (max-width:560px){
+  body{
+    background-size:130px auto,130px auto,100% auto;
+  }
+}
 </style>
 </head>
 <body>
