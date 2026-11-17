@@ -196,7 +196,6 @@ audio{width:100%;margin-top:10px}
 </div>
 <script src="plantillas.js"></script>
 <script>
-  $('btnPagar').addEventListener('click',()=>{guardar();location.href='pagar.html?plan='+(q.get('plan')||'completo')+'&cat='+cat;});
 const PLANES={
   esencial:{n:'Esencial',p:2990,fotos:3,musica:0,voz:0,video:false,cierres:['sobre','nota'],modos:['abierta']},
   completo:{n:'Completo',p:4990,fotos:15,musica:1,voz:1,video:false,cierres:['sobre','nota','polaroid','caja'],modos:['abierta','clave']},
@@ -208,22 +207,18 @@ const q=new URLSearchParams(location.search);
 const cat=q.get('cat')||'cumpleanos';
 const plan=PLANES[q.get('plan')]||PLANES.completo;
 document.querySelector('header a').href=cat+'.html';
-document.querySelector('header a').href=cat+'.html';
-const plan=PLANES[q.get('plan')]||PLANES.completo;
 const $=id=>document.getElementById(id);
-let fotos=[];
-  const CLAVE='cartita_borrador';
+const CLAVE='cartita_borrador';
 const campos=['de','para','fecha','mensaje','clave','instruccion','pista','apertura','hora','video','diseno'];
+let fotos=[];
+
 function guardar(){
   const d={fotos:fotos.slice(0,6)};
   campos.forEach(c=>d[c]=$(c).value);
   d.modo=(document.querySelector('input[name=modo]:checked')||{}).value;
   d.cierre=(document.querySelector('input[name=cierre]:checked')||{}).value;
   try{localStorage.setItem(CLAVE,JSON.stringify(d));}catch(e){}
-  const m=document.getElementById('marca');
-for(let i=0;i<24;i++){const s=document.createElement('span');s.textContent='VISTA PREVIA · CARTITA';m.appendChild(s);}
 }
-  
 function cargar(){
   let d;try{d=JSON.parse(localStorage.getItem(CLAVE)||'null');}catch(e){return;}
   if(!d)return;
@@ -275,8 +270,6 @@ PLANTILLAS.forEach(t=>{
 });
 
 /* fotos */
-
-/* fotos */
 $('inputFotos').addEventListener('change',async e=>{
   const files=[...e.target.files].slice(0,plan.fotos-fotos.length);
   for(const f of files)fotos.push(await achicar(f));
@@ -309,12 +302,12 @@ function pintarFotos(){
 }
 
 /* musica y voz */
-function bloqueAudio(id,etiqueta,tipo){
+function bloqueAudio(id,etiqueta){
   const w=document.createElement('div');
   w.innerHTML='<label>'+etiqueta+'</label><input type="text" placeholder="https://youtu.be/...">';
   $(id).appendChild(w);
 }
-if(plan.musica>0){for(let i=1;i<=plan.musica;i++)bloqueAudio('zonaMusica','Canción '+i,'musica');}
+if(plan.musica>0){for(let i=1;i<=plan.musica;i++)bloqueAudio('zonaMusica','Canción '+i);}
 else $('secMusica').style.display='none';
 
 if(plan.voz>0){
@@ -371,7 +364,17 @@ document.querySelectorAll('input,textarea,select').forEach(el=>{
 });
 cargar();
 
-$('btnPagar').addEventListener('click',()=>{guardar();location.href='pagar.html?plan='+(q.get('plan')||'completo');});
+const vence=new Date(Date.now()+1000*60*60*24*60);
+$('vence').textContent='Tu carta quedará online hasta el '+vence.toLocaleDateString('es-CL',{day:'numeric',month:'long',year:'numeric'})+', con mínimo 60 días.';
+
+if(plan.n!=='Premium'){
+  const sig=plan.n==='Esencial'?'completo':'premium';
+  const nm=sig==='premium'?'Premium':'Completo';
+  const pr=PLANES[sig].p.toLocaleString('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0});
+  $('zonaMejorar').innerHTML='<a class="btn" style="display:block" href="crear.html?plan='+sig+'&cat='+cat+'">Mejorar a '+nm+' por '+pr+'</a>';
+}
+
+$('btnPagar').addEventListener('click',()=>{guardar();location.href='pagar.html?plan='+(q.get('plan')||'completo')+'&cat='+cat;});
 </script>
 
 </body>
