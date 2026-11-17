@@ -336,6 +336,12 @@ $('mensaje').addEventListener('input',e=>$('cuentaTxt').textContent=e.target.val
 /* vista previa */
 $('btnPrev').addEventListener('click',()=>{
   const de=$('de').value||'Alguien',para=$('para').value||'ti',msg=$('mensaje').value;
+  const t=PLANTILLAS.find(x=>x.id===$('diseno').value)||PLANTILLAS[0];
+  const pv=$('prev');
+  pv.style.background=t.bg;pv.style.color=t.tx;
+  pv.style.setProperty('--lacre',t.ac);
+  pv.classList.add('tpl');
+  pv.style.fontFamily=t.f==='serif'?'var(--serif)':'var(--sans)';
   const modo=document.querySelector('input[name=modo]:checked').value;
   const cierre=document.querySelector('input[name=cierre]:checked').value;
   let cab='<p style="font-family:var(--sans);font-size:.8rem;color:var(--gris);margin:0 0 6px">'+cierre+' · '+modo+'</p>';
