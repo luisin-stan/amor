@@ -1,73 +1,234 @@
 <!-- ARCHIVO: carta.html — carta publicada -->
 <!doctype html><html lang="es-CL"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tu cartita — Cartita</title><meta name="robots" content="noindex">
+<title>Recibiste una carta — Cartita</title><meta name="robots" content="noindex">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilos.css"><style>
-:root{--lacre:#8E2F2F}
 body{background:var(--crema)}
-.cierre{min-height:100dvh;display:grid;place-items:center;padding:30px 20px}
+.cierre{min-height:100dvh;display:grid;place-items:center;padding:30px 20px;position:relative;overflow:hidden}
 .cierre.oculto{display:none}
-.sobre-caja{width:min(300px,80vw);position:relative;perspective:1000px;cursor:pointer}
+.escena{width:min(300px,80vw);position:relative;perspective:1000px;cursor:pointer}
 .pieza{position:relative;aspect-ratio:3/2;background:var(--blanco);border:1.5px solid var(--tinta);border-radius:6px;box-shadow:0 18px 40px rgba(31,27,22,.16)}
 .solapa{position:absolute;inset:0;background:var(--blanco);border:1.5px solid var(--tinta);border-radius:6px;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;z-index:3;transition:transform .9s}
 .sello{position:absolute;left:50%;top:56%;width:44px;height:44px;margin-left:-22px;border-radius:50%;background:var(--lacre);color:#fff;font-family:var(--serif);display:grid;place-items:center;z-index:4}
-.sobre-caja.abierto .solapa{transform:rotateX(-172deg)}
-.texto-sobre{text-align:center;margin-bottom:22px}
-.texto-sobre .k{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oliva);font-weight:600}
-.texto-sobre h1{font-family:var(--serif);font-size:1.8rem;margin:8px 0 0}
+.escena.abierto .solapa{transform:rotateX(-172deg)}
+.escena.abierto .sello{opacity:0}
+.texto{text-align:center;margin-bottom:22px}
+.texto .k{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oliva);font-weight:600}
+.texto h1{font-family:var(--serif);font-size:1.8rem;margin:8px 0 0}
+.texto p{margin:5px 0 0;color:var(--gris);font-size:.92rem}
+.candado{position:absolute;left:50%;top:56%;margin-left:-16px;width:32px;height:32px;border-radius:8px;background:var(--tinta);color:#fff;display:none;place-items:center;z-index:5}
+.clave .candado{display:grid}
+.panel{display:none;max-width:320px;margin:22px auto 0;text-align:center}
+.clave .panel{display:block}
+.pista{border:1px solid var(--linea);background:var(--blanco);border-radius:8px;padding:10px 14px;font-size:.86rem;margin-bottom:12px}
+.pista b{display:block;font-family:var(--serif);font-size:.95rem}
+.casillas{display:flex;gap:6px;justify-content:center;margin-bottom:12px}
+.casilla{width:28px;height:36px;border:1.5px solid var(--linea);border-radius:5px;background:var(--blanco);display:grid;place-items:center;position:relative;font-weight:600}
+.casilla.ok{border-color:var(--oliva);background:#EDF2EA}
+.casilla.mal{border-color:var(--lacre);background:#F7EAEA}
+.casilla .sg{position:absolute;top:-9px;font-size:.7rem;font-weight:700}
+.casilla.ok .sg{color:var(--oliva)}
+.casilla.mal .sg{color:var(--lacre)}
+.teclado{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.teclado button{padding:11px 0;border:1px solid var(--linea);background:var(--blanco);border-radius:7px;font-size:1rem;cursor:pointer;font-family:var(--sans)}
+.pedir{display:none;margin-top:12px;background:none;border:0;text-decoration:underline;color:var(--lacre);font-size:.84rem;cursor:pointer;font-family:var(--sans)}
+.pedir.visible{display:inline-block}
+.laPista{display:none;margin-top:9px;font-size:.84rem;background:#F2EDE3;border-radius:7px;padding:10px}
+.laPista.visible{display:block}
+.prog{display:none;text-align:center;margin-top:22px}
+.programada .prog{display:block}
+.reloj{display:flex;gap:9px;justify-content:center;font-family:var(--serif);font-size:1.6rem}
+.reloj span{background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:7px 11px;min-width:54px}
+.reloj small{display:block;font-family:var(--sans);font-size:.6rem;text-transform:uppercase;color:var(--gris);font-weight:400}
+.fp{font-size:.84rem;color:var(--gris);margin:10px 0 0}
 .carta{max-width:620px;margin:0 auto;padding:36px 20px 60px;display:none}
 .carta.visible{display:block}
 .carta h2{font-family:var(--serif);font-size:clamp(1.7rem,5vw,2.4rem);margin:0 0 6px}
 .carta .para{color:var(--gris);margin:0 0 24px;font-size:.92rem}
-.mensaje{font-family:var(--serif);font-size:1.1rem;line-height:1.75;margin:0 0 30px}
+.mensaje{font-family:var(--serif);font-size:1.1rem;line-height:1.75;margin:0 0 28px}
 .mensaje p{margin:0 0 15px}
-.fotos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:30px}
+.fotos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:26px}
 .fotos img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px}
-.pie-carta{text-align:center;border-top:1px solid var(--linea);padding-top:24px}
-.pie-carta a{color:var(--lacre);font-weight:600;text-decoration:none}
-.pie-carta span{display:block;font-size:.74rem;color:var(--gris);margin-top:8px}
-.barra-pub{position:fixed;left:0;right:0;bottom:0;background:var(--tinta);color:#fff;padding:10px 16px;display:flex;gap:10px;align-items:center;font-size:.8rem;z-index:50}
-.barra-pub input{flex:1;padding:9px;border-radius:6px;border:0;font-size:.78rem;font-family:var(--sans);min-width:0}
-.barra-pub button{border:0;border-radius:6px;padding:9px 12px;background:var(--lacre);color:#fff;font-weight:600;cursor:pointer;font-family:var(--sans)}
+.bloque{border:1px solid var(--linea);border-radius:10px;background:var(--blanco);padding:14px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.bloque b{font-size:.9rem;display:block}
+.bloque small{color:var(--gris);font-size:.76rem}
+.bloque audio{width:100%}
+.video{aspect-ratio:9/16;max-width:280px;margin:0 auto 24px}
+.video iframe{width:100%;height:100%;border:0;border-radius:14px}
+.cierre-final{text-align:center;font-family:var(--serif);font-size:1.28rem;margin:30px 0 8px}
+.firma{text-align:center;color:var(--gris);margin:0 0 34px}
+.pie{text-align:center;border-top:1px solid var(--linea);padding-top:22px}
+.pie a{color:var(--lacre);font-weight:600;text-decoration:none}
+.pie span{display:block;font-size:.74rem;color:var(--gris);margin-top:8px}
+.panel-dueno{position:fixed;left:0;right:0;bottom:0;background:var(--tinta);color:#fff;padding:10px 14px;display:none;gap:8px;align-items:center;font-size:.78rem;z-index:60;flex-wrap:wrap}
+.panel-dueno.visible{display:flex}
+.panel-dueno input{flex:1;min-width:120px;padding:8px;border-radius:6px;border:0;font-size:.75rem}
+.panel-dueno button{border:0;border-radius:6px;padding:8px 11px;background:var(--lacre);color:#fff;font-weight:600;cursor:pointer;font-family:var(--sans)}
+.panel-dueno a{color:#EFE7DB;text-decoration:underline;white-space:nowrap}
+#qr{width:150px;height:150px;display:block;margin:10px auto 0;background:#fff;padding:6px;border-radius:6px}
+/* cierres alternativos */
+.f-nota .pieza{aspect-ratio:3/4;width:70%}
+.f-pola .pieza{background:#fff;padding:10px 10px 34px;aspect-ratio:4/5;width:78%}
+.f-pola .pieza::after{content:"";position:absolute;inset:10px 10px 34px;background:linear-gradient(160deg,#E9D6D6,#8E2F2F)}
+.f-pola .solapa{display:none}
+.f-caja .pieza{aspect-ratio:1;width:70%}
+.f-frasco .pieza{border-radius:10px 10px 40px 40px;aspect-ratio:3/4;width:52%;background:#EFEAE0}
+.f-vinilo .pieza{aspect-ratio:1;width:70%;border-radius:4px}
+.f-peli .pieza{aspect-ratio:16/9;width:88%;background:#2A2621}
+.f-avion .pieza{clip-path:polygon(0 45%,100% 0,62% 100%,52% 58%);aspect-ratio:1;width:60%;background:var(--blanco)}
 </style></head><body>
+
 <section class="cierre" id="pantalla">
   <div>
-    <div class="texto-sobre"><p class="k">Recibiste una carta</p><h1 id="de">de alguien</h1><p id="para"></p></div>
-    <div class="sobre-caja" id="sobre" role="button" tabindex="0"><div class="pieza"><div class="solapa"></div><div class="sello">J</div></div></div>
-    <button class="btn btn-p" style="display:block;margin:24px auto 0" id="abrir">Abrir</button>
+    <div class="texto"><p class="k">Recibiste una carta</p><h1 id="de">de alguien</h1><p id="para"></p></div>
+    <div class="escena" id="escena" role="button" tabindex="0">
+      <div class="pieza"><div class="solapa"></div><div class="sello" id="sello">C</div><div class="candado">🔒</div></div>
+    </div>
+    <button class="btn btn-p" style="display:block;margin:22px auto 0" id="abrir">Abrir</button>
+    <div class="panel">
+      <div class="pista"><b id="instruccion">Escribe la fecha</b></div>
+      <div class="casillas" id="casillas" aria-live="polite"></div>
+      <div class="teclado" id="teclado"></div>
+      <button class="pedir" id="pedir"></button>
+      <div class="laPista" id="laPista"></div>
+    </div>
+    <div class="prog">
+      <div class="reloj"><span><b id="d">00</b><small>días</small></span><span><b id="h">00</b><small>hrs</small></span><span><b id="m">00</b><small>min</small></span><span><b id="s">00</b><small>seg</small></span></div>
+      <p class="fp" id="fp"></p>
+    </div>
   </div>
 </section>
+
 <main class="carta" id="carta">
   <p class="para" id="fecha"></p>
   <h2 id="titulo"></h2>
   <div class="mensaje" id="mensaje"></div>
+  <div id="musica"></div>
+  <div id="voz"></div>
   <div class="fotos" id="fotos"></div>
-  <p class="pie-carta"><a href="cumpleanos.html">Haz tu propia cartita →</a><span>Hecho en Cartita</span></p>
+  <div id="video"></div>
+  <p class="cierre-final" id="cierreFinal"></p>
+  <p class="firma" id="firma"></p>
+  <div class="pie"><a href="index.html">Haz tu propia cartita →</a><span>Hecho en Cartita</span></div>
 </main>
-<div class="barra-pub" id="barra" style="display:none">
+
+<div class="panel-dueno" id="dueno">
   <input id="link" readonly>
-  <button id="copiar">Copiar link</button>
+  <button id="copiar">Copiar</button>
+  <a href="#" id="verQR">QR</a>
+  <div id="qrCaja" style="display:none;width:100%"><img id="qr" alt="Código QR de tu carta"></div>
 </div>
+
+<script src="plantillas.js"></script>
 <script>
 const d=JSON.parse(localStorage.getItem('cartita_pagado')||'null');
 if(!d){location.href='crear.html';}
 else{
+  const t=PLANTILLAS.find(x=>x.id===d.diseno)||PLANTILLAS[0];
+  const r=document.documentElement.style;
+  r.setProperty('--crema',t.bg);r.setProperty('--tinta',t.tx);r.setProperty('--lacre',t.ac);
+  document.body.style.fontFamily=t.f==='serif'?'var(--serif)':'var(--sans)';
+
   document.getElementById('de').textContent='de '+(d.de||'alguien');
   if(d.para)document.getElementById('para').textContent='Para '+d.para;
-  document.querySelector('.sello').textContent=(d.de||'C').charAt(0);
+  document.getElementById('sello').textContent=(d.de||'C').charAt(0);
   document.getElementById('fecha').textContent=d.fecha||'';
-  document.getElementById('titulo').textContent=(d.mensaje||'').split('\n')[0]||'Tu carta';
+  document.getElementById('titulo').textContent=(d.mensaje||'').split('\n')[0]||'Una carta para ti';
   document.getElementById('mensaje').innerHTML=(d.mensaje||'').split('\n').slice(1).map(l=>'<p>'+l+'</p>').join('');
+  document.getElementById('cierreFinal').textContent=d.cierre||'';
+  document.getElementById('firma').textContent=d.de||'';
   document.getElementById('fotos').innerHTML=(d.fotos||[]).map(f=>'<img src="'+f+'" alt="">').join('');
+
+  if(d.cierre&&d.cierre!=='sobre')document.getElementById('escena').classList.add('f-'+d.cierre);
+
+  if(d.musica){
+    document.getElementById('musica').innerHTML='<div class="bloque"><div><b>Nuestra canción</b><small>Toca para escuchar</small></div></div>';
+    document.getElementById('musica').firstChild.onclick=()=>{
+      const id=(d.musica.match(/(?:v=|youtu\.be\/)([\w-]{11})/)||[])[1];
+      if(id)document.getElementById('musica').innerHTML='<iframe style="width:100%;aspect-ratio:16/9;border:0;border-radius:10px" src="https://www.youtube.com/embed/'+id+'" allow="autoplay" title="Canción"></iframe>';
+    };
+  }
+  if(d.voz){
+    document.getElementById('voz').innerHTML='<div class="bloque"><div style="flex:1"><b>Nota de voz</b><small>Escúchala</small><audio controls src="'+d.voz+'"></audio></div></div>';
+  }
+  if(d.video){
+    const vid=(d.video.match(/(?:v=|youtu\.be\/)([\w-]{11})/)||[])[1];
+    if(vid)document.getElementById('video').innerHTML='<div class="video"><iframe src="https://www.youtube.com/embed/'+vid+'" title="Video"></iframe></div>';
+  }
+
+  const modo=d.modo||'abierta';
+  if(modo==='clave'){
+    document.getElementById('pantalla').classList.add('clave');
+    document.getElementById('abrir').style.display='none';
+    document.getElementById('instruccion').textContent=d.instruccion||'Escribe la fecha';
+    document.getElementById('pedir').textContent='Pedirle una pista a '+(d.de||'').split(' ')[0];
+    document.getElementById('laPista').textContent=d.pista||'Pregúntale a quien te la mandó.';
+  }
+  if(modo==='programada'&&d.apertura){
+    document.getElementById('pantalla').classList.add('programada');
+    document.getElementById('abrir').style.display='none';
+    const fin=new Date(d.apertura+'T'+(d.hora||'20:00'));
+    document.getElementById('fp').textContent='Esta carta se abre el '+fin.toLocaleDateString('es-CL',{day:'numeric',month:'long',year:'numeric'})+' a las '+(d.hora||'20:00')+'.';
+    const tic=()=>{
+      const r2=fin-Date.now(),sg=Math.max(0,Math.floor(r2/1000));
+      document.getElementById('d').textContent=String(Math.floor(sg/86400)).padStart(2,'0');
+      document.getElementById('h').textContent=String(Math.floor(sg%86400/3600)).padStart(2,'0');
+      document.getElementById('m').textContent=String(Math.floor(sg%3600/60)).padStart(2,'0');
+      document.getElementById('s').textContent=String(sg%60).padStart(2,'0');
+      if(r2<=0)abrir();
+    };
+    tic();setInterval(tic,1000);
+  }
+
   const slug=(d.codigo||'AMR').replace(/[^A-Z0-9]/g,'').toLowerCase();
-  const url=location.origin+location.pathname.replace('carta.html','carta.html?c='+slug);
+  const url=location.origin+location.pathname+'?c='+slug;
   document.getElementById('link').value=url;
-  document.getElementById('barra').style.display='flex';
-  document.getElementById('copiar').addEventListener('click',()=>{navigator.clipboard.writeText(url);document.getElementById('copiar').textContent='Copiado';});
+  document.getElementById('dueno').classList.add('visible');
+  document.getElementById('copiar').onclick=()=>{navigator.clipboard.writeText(url);document.getElementById('copiar').textContent='Copiado';};
+  document.getElementById('verQR').onclick=e=>{e.preventDefault();
+    const c=document.getElementById('qrCaja');
+    c.style.display=c.style.display==='none'?'block':'none';
+    if(!document.getElementById('qr').src)document.getElementById('qr').src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+encodeURIComponent(url);
+  };
 }
-function abrir(){document.getElementById('sobre').classList.add('abierto');setTimeout(()=>{document.getElementById('pantalla').classList.add('oculto');document.getElementById('carta').classList.add('visible');},700);}
+
+function abrir(){
+  const e=document.getElementById('escena');
+  if(e.classList.contains('abierto'))return;
+  e.classList.add('abierto');
+  setTimeout(()=>{document.getElementById('pantalla').classList.add('oculto');document.getElementById('carta').classList.add('visible');},700);
+}
 document.getElementById('abrir').addEventListener('click',abrir);
-document.getElementById('sobre').addEventListener('click',abrir);
+document.getElementById('escena').addEventListener('click',()=>{if(!document.getElementById('pantalla').classList.contains('clave'))abrir();});
+
+/* clave */
+let escrito='',errores=0;
+const casillas=document.getElementById('casillas'),teclado=document.getElementById('teclado');
+function pintar(){
+  casillas.innerHTML='';
+  const largo=Math.max(4,(d&&d.clave||'0000').length);
+  for(let i=0;i<largo;i++){
+    const c=document.createElement('div');c.className='casilla';
+    if(escrito[i]){
+      if(escrito[i]===d.clave[i]){c.classList.add('ok');c.innerHTML='<span class="sg">✓</span>•';}
+      else{c.classList.add('mal');c.innerHTML='<span class="sg">✗</span>•';}
+    }
+    casillas.appendChild(c);
+  }
+}
+function digitar(n){
+  if(!d||!d.clave)return;
+  if(escrito.length>=d.clave.length)return;
+  escrito+=n;
+  if(escrito[escrito.length-1]!==d.clave[escrito.length-1]){errores++;if(errores>=3)document.getElementById('pedir').classList.add('visible');}
+  pintar();
+  if(escrito.length>=4&&d.clave.startsWith(escrito))abrir();
+}
+for(let n=1;n<=9;n++){const b=document.createElement('button');b.textContent=n;b.onclick=()=>digitar(String(n));teclado.appendChild(b);}
+const bb=document.createElement('button');bb.textContent='←';bb.setAttribute('aria-label','Borrar');bb.onclick=()=>{escrito=escrito.slice(0,-1);pintar();};teclado.appendChild(bb);
+const b0=document.createElement('button');b0.textContent='0';b0.onclick=()=>digitar('0');teclado.appendChild(b0);
+document.getElementById('pedir').onclick=()=>document.getElementById('laPista').classList.add('visible');
+pintar();
 </script>
 </body></html>
