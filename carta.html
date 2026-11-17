@@ -535,34 +535,77 @@ main{
       cajaFotos.appendChild(img);
     });
   }
-
-  /* ---------- musica ---------- */
+/* ---------- utilidades de medios ---------- */
   function idYoutube(u){
-    var m = String(u).match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
+    var m = String(u).match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{11})/);
     return m ? m[1] : null;
   }
+  function aTexto(v){
+    if(!v) return "";
+    if(typeof v === "string") return v;
+    return v.src || v.url || v.data || v.base64 || "";
+  }
 
-  var musica = carta.musica || carta.musicaUrl || "";
+  /* ---------- aviso de sonido bloqueado ---------- */
+  var avisoCreado = false;
+  function mostrarAviso(){
+    if(avisoCreado) return;
+    avisoCreado = true;
+    var barra = document.createElement("button");
+    barra.textContent = "Toca aquí para escuchar la música y su voz";
+    barra.style.cssText = "position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:40;border:0;border-radius:999px;padding:15px 22px;font:inherit;font-weight:700;color:#fff;background:#c8567f;box-shadow:0 12px 26px rgba(200,86,127,.4)";
+    barra.addEventListener("click", function(){
+      if(ytIfr){ ytMudo = false; cargarYt(); } else { partirMusica(); }
+      partirVoz();
+      barra.remove();
+      avisoCreado = false;
+    });
+    document.body.appendChild(barra);
+    setTimeout(function(){ if(barra.parentNode) barra.remove(); avisoCreado = false; }, 15000);
+  }
+
+  /* ---------- musica ---------- */
+  var musica = aTexto(carta.musica || carta.musicaUrl || carta.musicaLink);
+  var ytIfr = null;
+  var ytMudo = true;
+
+  function cargarYt(){
+    if(!ytIfr) return;
+    ytIfr.src = "https://www.youtube.com/embed/" + ytIfr.dataset.id +
+      "?autoplay=1&rel=0&playsinline=1" + (ytMudo ? "&mute=1" : "");
+  }
+
   if(musica){
     var cajaM = $("musicaCaja");
     var yt = idYoutube(musica);
     if(yt){
       var marco = document.createElement("div");
       marco.className = "marco";
-      var ifr = document.createElement("iframe");
-      ifr.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
-      ifr.setAttribute("allowfullscreen", "");
-      ifr.title = "Música de la cartita";
-      ifr.dataset.src = "https://www.youtube.com/embed/" + yt + "?autoplay=1&rel=0&playsinline=1";
-      marco.appendChild(ifr);
+      ytIfr = document.createElement("iframe");
+      ytIfr.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
+      ytIfr.setAttribute("allowfullscreen", "");
+      ytIfr.title = "Música de la cartita";
+      ytIfr.dataset.id = yt;
+      marco.appendChild(ytIfr);
       cajaM.appendChild(marco);
+
+      var btnSon = document.createElement("button");
+      btnSon.className = "silencio";
+      btnSon.textContent = "Activar sonido";
+      btnSon.addEventListener("click", function(){
+        ytMudo = !ytMudo;
+        cargarYt();
+        this.textContent = ytMudo ? "Activar sonido" : "Silenciar música";
+      });
+      cajaM.appendChild(btnSon);
+      $("btnSilencio").hidden = true;
     }else{
-      var aud = document.createElement("audio");
-      aud.controls = true;
-      aud.preload = "auto";
-      aud.src = musica;
-      cajaM.appendChild(aud);
-      musicaEl = aud;
+      musicaEl = document.createElement("audio");
+      musicaEl.controls = true;
+      musicaEl.preload = "auto";
+      musicaEl.setAttribute("playsinline", "");
+      musicaEl.src = musica;
+      cajaM.appendChild(musicaEl);
     }
     $("bloqueMusica").hidden = false;
   }
@@ -571,39 +614,41 @@ main{
     silenciada = !silenciada;
     if(musicaEl){
       if(silenciada) musicaEl.pause();
-      else musicaEl.play().catch(function(){});
+      else musicaEl.play().catch(mostrarAviso);
     }
     this.textContent = silenciada ? "Activar música" : "Silenciar música";
   });
 
   function partirMusica(){
     if(!musica || silenciada) return;
-    var ifr = document.querySelector("#musicaCaja iframe");
-    if(ifr) ifr.src = ifr.dataset.src;
-    if(musicaEl) musicaEl.play().catch(function(){});
+    if(ytIfr){ cargarYt(); return; }
+    if(musicaEl) musicaEl.play().catch(mostrarAviso);
   }
 
   /* ---------- voz ---------- */
-  var voces = carta.voz || carta.voces || [];
+  var voces = carta.voz || carta.voces || carta.notas || carta.audios || carta.notaVoz || [];
   if(typeof voces === "string") voces = [voces];
+  voces = voces.map(aTexto).filter(function(x){ return !!x; });
+
   if(voces.length){
     var cajaV = $("vozCaja");
     voces.forEach(function(src, i){
       var a = document.createElement("audio");
       a.controls = true;
       a.preload = "auto";
+      a.setAttribute("playsinline", "");
       a.src = src;
-      a.style.marginBottom = i ? "8px" : "0";
+      if(i) a.style.marginTop = "8px";
       cajaV.appendChild(a);
     });
     $("bloqueVoz").hidden = false;
   }
 
   function partirVoz(){
-    var primeros = document.querySelectorAll("#vozCaja audio");
-    if(!primeros.length) return;
-    primeros.forEach(function(a){ a.pause(); });
-    primeros[0].play().catch(function(){});
+    var lista = document.querySelectorAll("#vozCaja audio");
+    if(!lista.length) return;
+    for(var i = 0; i < lista.length; i++) lista[i].pause();
+    lista[0].play().catch(mostrarAviso);
   }
 
   /* ---------- video ---------- */
@@ -731,11 +776,16 @@ main{
     $("carta").hidden = false;
     window.scrollTo(0, 0);
 
-    partirMusica();
+   partirMusica();
+
+    setTimeout(partirVoz, musica ? 1200 : 200);
 
     setTimeout(function(){
-      partirVoz();
-    }, musica ? 1200 : 200);
+      var lista = document.querySelectorAll("#vozCaja audio, #musicaCaja audio");
+      var suena = false;
+      for(var i = 0; i < lista.length; i++){ if(!lista[i].paused) suena = true; }
+      if(!suena && (musica || voces.length)) mostrarAviso();
+    }, 2200);
 
     contar();
     marcaAgua();
