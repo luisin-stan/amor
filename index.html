@@ -88,19 +88,17 @@ footer .firma{font-family:var(--serif);color:#fff;font-size:1.2rem;margin-bottom
 body{
   background-color:var(--crema);
   color:var(--tinta);
+}
+
+.hero{
+  min-height:100vh;
+  min-height:100svh;
   background-image:
-    url("img/flores-esquina-der.png"),
-    url("img/flores-esquina-izq.png"),
+    radial-gradient(62% 58% at 50% 46%, rgba(247,243,236,.86), rgba(247,243,236,0) 72%),
     url("img/flores-hero.png");
-  background-repeat:no-repeat,no-repeat,no-repeat;
-  background-position:
-    right -58px top 88px,
-    left -58px top 88px,
-    top center;
-  background-size:
-    clamp(150px,26vw,250px) auto,
-    clamp(150px,26vw,250px) auto,
-    100% auto;
+  background-repeat:no-repeat,no-repeat;
+  background-position:center,center;
+  background-size:cover,cover;
 }
 
 h1,h2,h3,h4{color:var(--tinta)}
@@ -117,12 +115,6 @@ a{color:var(--lacre)}
   margin:34px auto;
   opacity:.9;
 }
-
-/* en teléfono los ramos van más chicos */
-@media (max-width:560px){
-  body{
-    background-size:130px auto,130px auto,100% auto;
-  }
 }
 </style>
 </head>
