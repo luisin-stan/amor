@@ -186,12 +186,6 @@ audio{width:100%;margin-top:10px}
   <div class="prev-pago">
     <div style="flex:0 0 auto"><small>Total</small><strong id="totalPrev">$4.990</strong></div>
     <button class="btn" id="btnPagar">Pagar y publicar</button>
-    if(plan.n!=='Premium'){
-  const sig=plan.n==='Esencial'?'completo':'premium';
-  const nm=sig==='premium'?'Premium':'Completo';
-  const pr=PLANES[sig].p.toLocaleString('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0});
-  $('zonaMejorar').innerHTML='<a class="btn" style="display:block" href="crear.html?plan='+sig+'&cat='+cat+'">Mejorar a '+nm+' por '+pr+'</a>';
-}
   </div>
 </div>
 <script src="plantillas.js"></script>
