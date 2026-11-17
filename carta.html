@@ -478,15 +478,21 @@ main{
   var codigo = (params.get("c") || "").trim();
   var carta = null;
 
+ var fuentes = ["cartita_publicadas","cartita_cartas","cartita_links"];
   try{
-    var pub = JSON.parse(localStorage.getItem("cartita_publicadas") || "{}");
-    if(codigo && pub[codigo]) carta = pub[codigo];
-    if(!carta && params.get("demo") === "1"){
-      var b = JSON.parse(localStorage.getItem("cartita_borrador") || "null");
-      if(b) carta = b;
+    for(var f = 0; f < fuentes.length; f++){
+      var pub = JSON.parse(localStorage.getItem(fuentes[f]) || "{}");
+      if(codigo && pub[codigo]){ carta = pub[codigo]; break; }
+    }
+    var borr = JSON.parse(localStorage.getItem("cartita_borrador") || "null");
+    if(!carta && params.get("demo") === "1") carta = borr;
+    if(carta && borr){
+      ["musica","musicaUrl","musicaLink","voz","voces","notas","audios","notaVoz","video","videoUrl",
+       "fotos","tratamiento","cierre","clave","modo","para","de","titulo","mensaje","vence"].forEach(function(k){
+        if(!carta[k] && borr[k]) carta[k] = borr[k];
+      });
     }
   }catch(e){}
-
   var $ = function(id){ return document.getElementById(id); };
 
   if(!carta){
