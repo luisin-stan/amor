@@ -139,14 +139,25 @@ a{color:var(--lacre)}
 .cat[href*="agradecimiento"] .fondo{background-image:url("img/agradecimiento.png") !important}
 .cat[href*="navidad"] .fondo{background-image:url("img/navidad.png") !important}
 .cat[href*="ano-nuevo"] .fondo{background-image:url("img/ano-nuevo.png") !important}
+  .cab{display:flex;align-items:center;gap:12px}
+.volver-top{
+  font-size:.85rem;
+  color:var(--gris);
+  text-decoration:none;
+  border:1px solid var(--linea);
+  border-radius:999px;
+  padding:6px 12px;
+}
+.volver-top:hover{color:var(--tinta);border-color:var(--gris)}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="wrap"><a class="logo" href="index.html">carti<span>ta</span></a></div>
+  <div class="wrap cab">
+    <a class="volver-top" href="index.html">← Volver</a>
+    <a class="logo" href="index.html">carti<span>ta</span></a>
+  </div>
 </header>
-
 <main>
 <div class="hero wrap">
   <p class="kicker">Cartas digitales para Chile y todo el mundo</p>
