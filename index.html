@@ -448,29 +448,229 @@ a{color:var(--lacre)}
         <small>ahora</small>
       </div>
 
-      <div class="ph-env">
-        <div class="ph-tilt">
-          <div class="ph-paper">
-            <div class="ph-in">
-              <p class="ph-para">Para Luis</p>
-              <p class="ph-txt">Contigo todo tiene otro color. Gracias por quedarte incluso en los días grises.</p>
-              <div class="ph-fotos">
-                <img src="img/carta-couple.jpg" alt="">
-                <img src="img/carta-rosas.jpg" alt="">
-                <span class="ph-heart ph-h1">♥</span>
-                <span class="ph-heart ph-h2">♥</span>
-                <span class="ph-heart ph-h3">♥</span>
-              </div>
-              <div class="ph-mus">
-                <span class="ph-play"></span>
-                <span class="ph-mus-t">Nuestra canción</span>
-                <span class="ph-mute">♪</span>
-              </div>
-              <div class="ph-vid">
-                <span class="ph-play ph-play-w"></span>
-                <span class="ph-vid-t">Un video para ti · 0:24</span>
-              </div>
-              <p class="ph-firma">De parte de Juana</p>
+    .ph-env{
+  position:absolute;
+  left:50%;
+  margin-left:-100px;
+  bottom:96px;
+  width:200px;
+  height:128px;
+  perspective:1000px;
+  animation:phEnv 11s ease-in-out infinite;
+}
+@keyframes phEnv{
+  0%,26%{opacity:0;transform:translateY(22px) scale(.85)}
+  34%,86%{opacity:1;transform:translateY(0) scale(1)}
+  92%,100%{opacity:0;transform:translateY(16px) scale(.9)}
+}
+.ph-tilt{
+  position:absolute;
+  inset:0;
+  transform-style:preserve-3d;
+  animation:phTilt 11s ease-in-out infinite;
+}
+@keyframes phTilt{
+  0%,100%{transform:rotate(-1.2deg)}
+  50%{transform:rotate(1.2deg)}
+}
+
+.ph-body{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:200px;
+  height:128px;
+  border-radius:5px;
+  background:linear-gradient(175deg,#82182f,#54101f 55%,#3a0a15);
+  box-shadow:
+    inset 0 1px 0 rgba(255,236,200,.28),
+    inset 0 -14px 24px rgba(0,0,0,.4),
+    inset 0 0 0 1px rgba(214,175,110,.35),
+    0 18px 30px rgba(31,27,22,.34);
+  z-index:2;
+}
+.ph-body::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:5px;
+  background:
+    linear-gradient(to top right,rgba(255,255,255,.06) 49.7%,transparent 50%),
+    linear-gradient(to top left,rgba(255,255,255,.06) 49.7%,transparent 50%);
+}
+
+.ph-flap{
+  position:absolute;
+  left:0;
+  bottom:40px;
+  width:200px;
+  height:88px;
+  background:linear-gradient(180deg,#8f1c37,#5d1122);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top center;
+  backface-visibility:hidden;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,.35));
+  animation:phFlap 11s ease-in-out infinite, phFlapZ 11s steps(1) infinite;
+}
+@keyframes phFlap{
+  0%,40%{transform:rotateX(0deg)}
+  50%,72%{transform:rotateX(-158deg)}
+  80%,100%{transform:rotateX(0deg)}
+}
+@keyframes phFlapZ{
+  0%,40%{z-index:4}
+  42%,78%{z-index:1}
+  80%,100%{z-index:4}
+}
+
+.ph-seal{
+  position:absolute;
+  left:50%;
+  bottom:34px;
+  width:32px;
+  height:32px;
+  margin-left:-16px;
+  border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#f0d29a,#b98f38 55%,#7d5a1c);
+  color:#4a0d1c;
+  font-family:var(--serif);
+  font-size:.8rem;
+  font-weight:700;
+  display:grid;
+  place-items:center;
+  box-shadow:0 3px 9px rgba(31,27,22,.45), inset 0 1px 2px rgba(255,255,255,.5);
+  z-index:5;
+  animation:phSeal 11s ease-in-out infinite;
+}
+@keyframes phSeal{
+  0%,36%{opacity:1;transform:scale(1)}
+  42%{opacity:1;transform:scale(.9)}
+  48%,74%{opacity:0;transform:scale(.5)}
+  82%,100%{opacity:1;transform:scale(1)}
+}
+
+.ph-pocket{
+  position:absolute;
+  left:0;
+  right:0;
+  top:-300px;
+  bottom:0;
+  overflow:hidden;
+  z-index:1;
+  animation:phPocketZ 11s steps(1) infinite;
+}
+@keyframes phPocketZ{
+  0%,46%{z-index:1}
+  48%,74%{z-index:3}
+  76%,100%{z-index:1}
+}
+
+.ph-paper{
+  position:absolute;
+  left:16px;
+  bottom:0;
+  width:168px;
+  height:220px;
+  background:var(--blanco);
+  border:1px solid var(--linea);
+  border-radius:3px;
+  box-shadow:0 -6px 16px rgba(31,27,22,.18);
+  padding:9px 10px;
+  animation:phPaper 11s ease-in-out infinite;
+}
+@keyframes phPaper{
+  0%,44%{transform:translateY(92px)}
+  56%,70%{transform:translateY(-120px)}
+  78%,100%{transform:translateY(92px)}
+}
+.ph-paper::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:26px;
+  border-radius:3px 3px 0 0;
+  background:linear-gradient(180deg,rgba(31,27,22,.09),transparent);
+}
+.ph-in{opacity:0;animation:phIn 11s ease-in-out infinite}
+@keyframes phIn{
+  0%,56%{opacity:0;transform:translateY(6px)}
+  62%,70%{opacity:1;transform:translateY(0)}
+  78%,100%{opacity:0}
+}
+.ph-para{
+  font-family:var(--serif);
+  font-size:.62rem;
+  color:var(--lacre);
+  margin:0 0 4px;
+  letter-spacing:.05em;
+}
+.ph-txt{font-size:.53rem;line-height:1.4;color:var(--tinta);margin:0 0 6px}
+.ph-fotos{position:relative;display:flex;gap:5px;margin-bottom:6px}
+.ph-fotos img{width:50%;height:62px;object-fit:cover;border-radius:2px;display:block}
+.ph-heart{
+  position:absolute;
+  color:var(--lacre);
+  font-size:.6rem;
+  animation:phLatir 2.2s ease-in-out infinite;
+}
+.ph-h1{top:-3px;right:52%;font-size:.52rem}
+.ph-h2{top:26px;right:45%;animation-delay:.5s}
+.ph-h3{top:-2px;right:4px;animation-delay:1s}
+@keyframes phLatir{
+  0%,100%{transform:scale(1);opacity:.8}
+  50%{transform:scale(1.3);opacity:1}
+}
+.ph-mus{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  background:var(--crema);
+  border:1px solid var(--linea);
+  border-radius:5px;
+  padding:4px 6px;
+  margin-bottom:5px;
+}
+.ph-play{
+  width:14px;
+  height:14px;
+  flex:0 0 14px;
+  border-radius:50%;
+  background:var(--lacre);
+  position:relative;
+}
+.ph-play::after{
+  content:"";
+  position:absolute;
+  left:5px;
+  top:4px;
+  border-left:5px solid #fff;
+  border-top:3px solid transparent;
+  border-bottom:3px solid transparent;
+}
+.ph-mus-t{font-size:.5rem;color:var(--tinta);flex:1}
+.ph-mute{font-size:.55rem;color:var(--gris)}
+.ph-vid{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  background:var(--tinta);
+  border-radius:5px;
+  padding:4px 6px;
+  margin-bottom:5px;
+}
+.ph-play-w{background:var(--blanco)}
+.ph-play-w::after{border-left-color:var(--tinta)}
+.ph-vid-t{font-size:.5rem;color:#e8ded2}
+.ph-firma{
+  font-family:var(--serif);
+  font-size:.54rem;
+  font-style:italic;
+  color:var(--gris);
+  text-align:right;
+  margin:0;
+}
             </div>
           </div>
           <div class="ph-body"></div>
