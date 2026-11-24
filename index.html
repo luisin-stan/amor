@@ -436,6 +436,15 @@ a{color:var(--lacre)}
   </div>
   <p class="precio">desde $2.990 pesos</p>
   <p class="usd">≈ USD $3 · IVA incluido</p>
+ <div class="demo">
+    <img class="demo-foto f1" src="img/reaccion-1.jpg" alt="Mujer leyendo una cartita en su celular">
+    <img class="demo-foto f2" src="img/reaccion-2.jpg" alt="Mujer sorprendida al recibir una cartita">
+    <div class="ph" aria-hidden="true">
+      ...
+    </div>
+    <img class="demo-foto f3" src="img/reaccion-3.jpg" alt="Dos amigas mirando una cartita juntas">
+    <img class="demo-foto f4" src="img/reaccion-4.jpg" alt="Mujer emocionada leyendo una cartita">
+  </div>
 
  <div class="ph" aria-hidden="true">
     <span class="ph-notch"></span>
@@ -513,6 +522,17 @@ a{color:var(--lacre)}
 .ph-play-w::after{border-left-color:var(--tinta)}
 .ph-vid-t{font-size:.5rem;color:#e8ded2}
 .ph-firma{font-family:var(--serif);font-size:.54rem;font-style:italic;color:var(--gris);text-align:right;margin:0}
+ .demo{position:relative;max-width:820px;margin:0 auto;display:flex;justify-content:center}
+.demo-foto{
+  position:absolute;width:168px;aspect-ratio:4/5;object-fit:cover;
+  border:6px solid var(--blanco);border-radius:12px;
+  box-shadow:0 14px 30px rgba(31,27,22,.22);z-index:1;
+}
+.f1{left:-10px;top:34px;transform:rotate(-5deg)}
+.f2{left:104px;top:336px;width:146px;transform:rotate(4deg)}
+.f3{right:104px;top:52px;width:146px;transform:rotate(5deg)}
+.f4{right:-10px;top:360px;transform:rotate(-4deg)}
+@media (max-width:900px){.demo-foto{display:none}}
 </style>
 
 <section class="wrap">
